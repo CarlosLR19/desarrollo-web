@@ -20,3 +20,5 @@ dist/
 # Sistema
 .DS_Store
 Thumbs.db
+
+#esto evitará subir archivos temporales, dependencias y confs locales
