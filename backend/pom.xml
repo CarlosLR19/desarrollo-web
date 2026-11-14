@@ -27,7 +27,8 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>21</java.version>
+		<!-- 17: es el JDK instalado en la WSL de todos; Spring Boot 4 lo soporta -->
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -45,6 +46,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+		<!-- Solo el cifrado BCrypt para contraseñas (RNF04). Spring Security + JWT llega en el Entregable 3 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
 		</dependency>
 
 		<dependency>

@@ -1,8 +1,8 @@
----- Creacion de la BD ---
+#---- Creacion de la BD ---
 CREATE DATABASE IF NOT EXISTS chordlab CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE chordlab;
 
------ Creacion de tablas---
+#----- Creacion de tablas---
 
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,7 +12,7 @@ CREATE TABLE usuario (
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- La tabla proyecto depende de la tabla usuario mediante una llave foranea -- 
+#-- La tabla proyecto depende de la tabla usuario mediante una llave foranea -- 
 CREATE TABLE proyecto (
     id_proyecto INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE proyecto (
         ON DELETE CASCADE
 );
 
---- Tabla seccion depende de proyecto --- 
+#--- Tabla seccion depende de proyecto --- 
 CREATE TABLE seccion (
     id_seccion INT AUTO_INCREMENT PRIMARY KEY,
     id_proyecto INT NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE seccion (
         ON DELETE CASCADE
 );
 
---- La tabla progresion depende de seccion ---
+#--- La tabla progresion depende de seccion ---
 CREATE TABLE progresion (
     id_progresion INT AUTO_INCREMENT PRIMARY KEY,
     id_seccion INT NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE acorde (
         ON DELETE CASCADE
 );
 
---- La tabla compartir proyecto depende de proyecto ---
+#--- La tabla compartir proyecto depende de proyecto ---
 CREATE TABLE compartir_proyecto (
     id_compartir INT AUTO_INCREMENT PRIMARY KEY,
     id_proyecto INT NOT NULL,
