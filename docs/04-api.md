@@ -1,66 +1,62 @@
-# 04. Diseño de API REST – ChordLab
+# ChordLab — Diseño de API REST
 
-## 1. Introducción
+## 1. Descripción
 
-La API REST de ChordLab será el medio de comunicación entre el frontend y el backend de la plataforma. Permitirá intercambiar información mediante solicitudes HTTP y respuestas en formato JSON.
+La API REST de ChordLab permite comunicar el frontend con el backend desarrollado en Java y Spring Boot.
 
-El backend será desarrollado con Java y Spring Boot, mientras que el frontend utilizará HTML, CSS y JavaScript para consumir los servicios mediante Fetch API.
+Se utilizan peticiones HTTP mediante Fetch y el formato JSON para intercambiar información.
 
-La API permitirá administrar usuarios, proyectos musicales, secciones, progresiones armónicas y acordes. También proporcionará los servicios necesarios para generar estructuras musicales y compartir composiciones.
+La API permite administrar usuarios, proyectos musicales, secciones, progresiones armónicas y acordes, además de generar acordes y progresiones y compartir proyectos mediante enlaces.
 
 ## 2. Configuración general
 
-La API tendrá las siguientes características:
+URL base: http://localhost:8090/api
 
-- **Arquitectura:** REST.
-- **Backend:** Java con Spring Boot.
-- **Frontend:** HTML, CSS y JavaScript.
-- **Comunicación:** HTTP.
-- **Formato de intercambio:** JSON.
-- **Consumo de servicios:** Fetch API.
-- **Base de datos:** MySQL.
-- **Persistencia:** Hibernate mediante JPA.
-- **Puerto de desarrollo:** 8080.
-- **Ruta base:** `/api`.
+El prefijo `/api` se define en `application.properties` con `server.servlet.context-path=/api`, por lo que los controladores declaran rutas sin el prefijo (por ejemplo `/usuarios/registro`).
 
-La dirección local de la API durante el desarrollo será:
+Tecnologías:
+- Java 21 con Spring Boot.
+- MySQL.
+- Hibernate/JPA.
+- JavaScript con Fetch.
+- JSON.
 
-`http://localhost:8080/api`
+Métodos HTTP:
+- GET: consultar información.
+- POST: registrar información o ejecutar acciones.
+- PUT: actualizar información.
+- DELETE: eliminar registros.
 
-## 3. Métodos HTTP
+Alcance por entregable:
+- **Entregable 2 (backend básico):** POST y GET.
+- **Entregable 3 (API completa):** PUT, DELETE, filtros y validación de respuestas HTTP.
 
-Para realizar las operaciones sobre los recursos del sistema se utilizarán los siguientes métodos:
+## 3. Endpoints de usuarios
 
-**GET:** permite consultar información almacenada, como los proyectos de un usuario o los acordes de una progresión.
+Responsable del módulo: Nino.
 
-**POST:** permite registrar información nueva, como usuarios, proyectos, acordes y progresiones.
+| Método | Endpoint | Función | Acceso |
+|---|---|---|---|
+| POST | /usuarios/registro | Registrar usuario | Público |
+| POST | /usuarios/login | Iniciar sesión | Público |
+| GET | /usuarios/perfil | Consultar perfil propio | Autenticado |
+| PUT | /usuarios/perfil | Actualizar datos personales | Autenticado |
 
-**PUT:** permite modificar información existente, como los datos de un proyecto o una sección musical.
+### Ejemplo: registrar usuario
 
-**DELETE:** permite eliminar recursos, como proyectos, secciones, progresiones y acordes.
+POST /usuarios/registro
 
-## 4. Endpoints de usuarios
-
-Estos servicios permitirán administrar las cuentas de los usuarios y controlar el acceso a la plataforma.
-
-- `POST /usuarios/registro`: registra un nuevo usuario.
-- `POST /usuarios/login`: permite iniciar sesión.
-- `GET /usuarios/perfil`: consulta los datos del usuario autenticado.
-- `PUT /usuarios/perfil`: modifica la información del perfil.
-
-### Ejemplo de registro
-
-Solicitud:
+Solicitud JSON:
 
 ```json
 {
-  "nombre": "Chuchin Diaz",
-  "correo": "chichin24@email.com",
-  "contrasena": "ejemplo123"
+  "nombre": "Juan Perez",
+  "correo": "juan@example.com",
+  "contrasena": "EjemploSeguro123"
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 201 Created
 
 ```json
 {
@@ -69,18 +65,22 @@ Respuesta esperada:
 }
 ```
 
-### Ejemplo de inicio de sesión
+La contraseña se almacena con un algoritmo de hash y nunca se devuelve en las respuestas.
 
-Solicitud:
+### Ejemplo: iniciar sesión
+
+POST /usuarios/login
+
+Solicitud JSON:
 
 ```json
 {
-  "correo": "chichin24@email.com",
-  "contrasena": "ejemplo123"
+  "correo": "juan@example.com",
+  "contrasena": "EjemploSeguro123"
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 200 OK
 
 ```json
 {
@@ -90,19 +90,25 @@ Respuesta esperada:
 }
 ```
 
-## 5. Endpoints de proyectos musicales
+Las solicitudes a endpoints protegidos incluyen la cabecera `Authorization: Bearer <token>`.
 
-Estos servicios permitirán crear y administrar los proyectos musicales de cada usuario.
+## 4. Endpoints de proyectos musicales
 
-- `GET /proyectos`: consulta los proyectos del usuario autenticado.
-- `POST /proyectos`: crea un nuevo proyecto musical.
-- `GET /proyectos/{id}`: consulta un proyecto específico.
-- `PUT /proyectos/{id}`: modifica los datos de un proyecto.
-- `DELETE /proyectos/{id}`: elimina un proyecto.
+Responsable del módulo: Carlos.
 
-### Ejemplo de creación de proyecto
+| Método | Endpoint | Función | Acceso |
+|---|---|---|---|
+| GET | /proyectos | Listar proyectos propios | Autenticado |
+| POST | /proyectos | Crear proyecto | Autenticado |
+| GET | /proyectos/{id} | Consultar un proyecto | Propietario |
+| PUT | /proyectos/{id} | Modificar proyecto | Propietario |
+| DELETE | /proyectos/{id} | Eliminar proyecto | Propietario |
 
-Solicitud:
+### Ejemplo: crear proyecto
+
+POST /proyectos
+
+Solicitud JSON:
 
 ```json
 {
@@ -116,7 +122,7 @@ Solicitud:
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 201 Created
 
 ```json
 {
@@ -129,28 +135,26 @@ Respuesta esperada:
 }
 ```
 
-### Consulta mediante Query String
+### Búsqueda con Query String
 
-La API también permitirá utilizar parámetros en la URL para filtrar y organizar los resultados.
+GET /proyectos?busqueda=cancion&pagina=0&limite=10
 
-Ejemplo:
+Devuelve los proyectos cuyo nombre coincida con la búsqueda, con paginación.
 
-`GET /proyectos?busqueda=cancion&pagina=0&limite=10`
+## 5. Endpoints de secciones
 
-Los parámetros permitirán buscar proyectos por nombre y controlar la cantidad de resultados mostrados.
+Responsable del módulo: Carlos.
 
-## 6. Endpoints de secciones musicales
+| Método | Endpoint | Función | Acceso |
+|---|---|---|---|
+| GET | /proyectos/{idProyecto}/secciones | Listar secciones de un proyecto | Propietario |
+| POST | /proyectos/{idProyecto}/secciones | Crear sección | Propietario |
+| PUT | /secciones/{id} | Modificar sección | Propietario |
+| DELETE | /secciones/{id} | Eliminar sección | Propietario |
 
-Permitirán organizar los proyectos en diferentes partes de una canción, como introducción, verso, coro y puente.
+### Ejemplo: crear sección
 
-- `GET /proyectos/{idProyecto}/secciones`: consulta las secciones de un proyecto.
-- `POST /proyectos/{idProyecto}/secciones`: crea una nueva sección.
-- `PUT /secciones/{id}`: modifica una sección.
-- `DELETE /secciones/{id}`: elimina una sección.
-
-### Ejemplo de creación de sección
-
-Solicitud:
+POST /proyectos/1/secciones
 
 ```json
 {
@@ -159,7 +163,7 @@ Solicitud:
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 201 Created
 
 ```json
 {
@@ -170,19 +174,21 @@ Respuesta esperada:
 }
 ```
 
-## 7. Endpoints de progresiones armónicas
+## 6. Endpoints de progresiones
 
-Estos servicios permitirán crear y administrar las secuencias de acordes que forman parte de cada sección musical.
+Responsable del módulo: Carlos.
 
-- `GET /secciones/{idSeccion}/progresiones`: consulta las progresiones de una sección.
-- `POST /secciones/{idSeccion}/progresiones`: crea una progresión.
-- `GET /progresiones/{id}`: consulta una progresión específica.
-- `PUT /progresiones/{id}`: modifica una progresión.
-- `DELETE /progresiones/{id}`: elimina una progresión.
+| Método | Endpoint | Función | Acceso |
+|---|---|---|---|
+| GET | /secciones/{idSeccion}/progresiones | Listar progresiones de una sección | Propietario |
+| POST | /secciones/{idSeccion}/progresiones | Crear progresión | Propietario |
+| GET | /progresiones/{id} | Consultar una progresión | Propietario |
+| PUT | /progresiones/{id} | Modificar progresión | Propietario |
+| DELETE | /progresiones/{id} | Eliminar progresión | Propietario |
 
-### Ejemplo de creación de progresión
+### Ejemplo: crear progresión
 
-Solicitud:
+POST /secciones/1/progresiones
 
 ```json
 {
@@ -191,7 +197,7 @@ Solicitud:
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 201 Created
 
 ```json
 {
@@ -201,18 +207,22 @@ Respuesta esperada:
 }
 ```
 
-## 8. Endpoints de acordes
+## 7. Endpoints de acordes
 
-Permitirán agregar, consultar, modificar y eliminar acordes dentro de una progresión armónica.
+Responsable del módulo: Carlos.
 
-- `GET /progresiones/{idProgresion}/acordes`: consulta los acordes de una progresión.
-- `POST /progresiones/{idProgresion}/acordes`: agrega un acorde.
-- `PUT /acordes/{id}`: modifica un acorde.
-- `DELETE /acordes/{id}`: elimina un acorde.
+| Método | Endpoint | Función | Acceso |
+|---|---|---|---|
+| GET | /progresiones/{idProgresion}/acordes | Listar acordes de una progresión | Propietario |
+| POST | /progresiones/{idProgresion}/acordes | Agregar acorde | Propietario |
+| PUT | /acordes/{id} | Modificar acorde | Propietario |
+| DELETE | /acordes/{id} | Eliminar acorde | Propietario |
 
-### Ejemplo de registro de acorde
+Valores válidos de `tipo`: `mayor`, `menor`, `disminuido`, `aumentado`, `7`, `maj7`, `m7`, `sus2`, `sus4`.
 
-Solicitud:
+### Ejemplo: agregar acorde
+
+POST /progresiones/1/acordes
 
 ```json
 {
@@ -224,7 +234,7 @@ Solicitud:
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 201 Created
 
 ```json
 {
@@ -236,15 +246,20 @@ Respuesta esperada:
 }
 ```
 
-## 9. Endpoints del generador musical
+## 8. Endpoints del generador musical
 
-Estos servicios contendrán la lógica necesaria para generar acordes y progresiones armónicas a partir de parámetros musicales.
+Responsable del módulo: César.
 
-### 9.1 Generación de acordes
+| Método | Endpoint | Función | Acceso |
+|---|---|---|---|
+| POST | /musica/acordes/generar | Generar un acorde | Público |
+| POST | /musica/progresiones/generar | Generar una progresión | Público |
 
-- `POST /musica/acordes/generar`: genera un acorde según la nota fundamental, tipo e inversión seleccionados.
+Estos endpoints no guardan información: calculan el resultado a partir de los parámetros recibidos.
 
-Solicitud:
+### Ejemplo: generar acorde
+
+POST /musica/acordes/generar
 
 ```json
 {
@@ -254,7 +269,7 @@ Solicitud:
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 200 OK
 
 ```json
 {
@@ -265,11 +280,9 @@ Respuesta esperada:
 }
 ```
 
-### 9.2 Generación de progresiones
+### Ejemplo: generar progresión
 
-- `POST /musica/progresiones/generar`: genera una progresión armónica de acuerdo con la tonalidad y escala seleccionadas.
-
-Solicitud:
+POST /musica/progresiones/generar
 
 ```json
 {
@@ -280,147 +293,82 @@ Solicitud:
 }
 ```
 
-Respuesta esperada:
+Respuesta esperada: HTTP 200 OK
 
 ```json
 {
   "tonalidad": "C",
   "escala": "mayor",
   "progresion": [
-    {
-      "acorde": "C",
-      "grado": "I"
-    },
-    {
-      "acorde": "G",
-      "grado": "V"
-    },
-    {
-      "acorde": "Am",
-      "grado": "vi"
-    },
-    {
-      "acorde": "F",
-      "grado": "IV"
-    }
+    { "acorde": "C", "tipo": "mayor", "grado": "I" },
+    { "acorde": "G", "tipo": "mayor", "grado": "V" },
+    { "acorde": "A", "tipo": "menor", "grado": "vi" },
+    { "acorde": "F", "tipo": "mayor", "grado": "IV" }
   ]
 }
 ```
 
-Las progresiones generadas podrán ser modificadas por el usuario y posteriormente almacenadas dentro de sus proyectos.
+Escalas admitidas: `mayor` y `menor`. Estilos: `pop`, `rock`, `jazz` y `triste`. Las progresiones generadas pueden modificarse y guardarse en un proyecto.
 
-## 10. Endpoints para compartir proyectos
+## 9. Endpoints para compartir proyectos
 
-Estos servicios permitirán compartir composiciones mediante enlaces de acceso.
+Responsable del módulo: César.
 
-- `POST /proyectos/{id}/compartir`: genera un enlace para compartir un proyecto.
-- `GET /compartidos/{token}`: consulta un proyecto mediante su enlace.
-- `DELETE /compartidos/{id}`: desactiva un enlace compartido.
+| Método | Endpoint | Función | Acceso |
+|---|---|---|---|
+| POST | /proyectos/{id}/compartir | Generar enlace para compartir | Propietario |
+| GET | /compartidos/{token} | Consultar proyecto por enlace | Con token |
+| DELETE | /compartidos/{id} | Desactivar enlace | Propietario |
 
-Se contemplarán dos tipos de permisos:
+Permisos: **lectura** (solo consulta) y **edición** (permite modificar). Los enlaces pueden tener fecha de expiración y desactivarse.
 
-- **Lectura:** permite consultar el proyecto sin modificarlo.
-- **Edición:** permite realizar modificaciones al proyecto compartido.
+Este módulo se implementará después del backend básico.
 
-Los enlaces podrán contar con una fecha de expiración y podrán desactivarse por su propietario.
+## 10. Reglas de la API
 
-## 11. Códigos de respuesta HTTP
+1. Los proyectos y su contenido solo pueden ser consultados o modificados por su propietario, o por quien tenga un enlace compartido válido.
+2. Las operaciones sobre proyectos, secciones, progresiones y acordes requieren inicio de sesión.
+3. Los endpoints de generación musical son públicos.
+4. Las contraseñas se almacenan con hash y no se devuelven nunca.
+5. Los valores de `tipo`, `escala` y `fundamental` se validan en el backend.
+6. Los acordes y secciones se ordenan con el campo `orden`.
+7. Al eliminar un proyecto se eliminan sus secciones, progresiones y acordes.
+8. La API devuelve respuestas JSON.
+9. Las validaciones de datos se realizan en el backend.
+10. La reproducción de audio se realiza en el navegador; la API solo entrega los datos musicales.
 
-La API utilizará códigos de estado HTTP para indicar el resultado de las solicitudes.
+## 11. Códigos HTTP esperados
 
-- **200 OK:** solicitud procesada correctamente.
-- **201 Created:** recurso creado correctamente.
-- **204 No Content:** recurso eliminado correctamente.
-- **400 Bad Request:** los datos enviados son incorrectos.
-- **401 Unauthorized:** el usuario no está autenticado.
-- **403 Forbidden:** el usuario no tiene permisos suficientes.
-- **404 Not Found:** el recurso solicitado no existe.
-- **409 Conflict:** existe un conflicto con la información enviada.
-- **500 Internal Server Error:** ocurrió un error interno en el servidor.
+| Código | Significado |
+|---|---|
+| 200 | Operación exitosa |
+| 201 | Registro creado |
+| 204 | Recurso eliminado |
+| 400 | Datos inválidos |
+| 401 | Usuario no autenticado |
+| 403 | Permisos insuficientes |
+| 404 | Recurso no encontrado |
+| 409 | Conflicto (por ejemplo, correo ya registrado) |
+| 500 | Error interno del servidor |
 
-## 12. Seguridad de la API
+## 12. Organización en el backend
 
-Se contemplan mecanismos de seguridad para proteger las cuentas y composiciones de los usuarios.
+- **Controller:** recibe las solicitudes HTTP y devuelve las respuestas (`@RestController`, `@CrossOrigin`).
+- **Service:** lógica de negocio y generación musical.
+- **Repository:** acceso a MySQL mediante JPA e Hibernate.
+- **Entity:** tablas almacenadas en MySQL.
+- **DTO:** datos que se reciben y envían por la API.
 
-- Autenticación mediante tokens JWT.
-- Almacenamiento de contraseñas mediante algoritmos seguros de hash.
-- Validación de los datos recibidos.
-- Protección de los endpoints que requieren autenticación.
-- Verificación de permisos antes de modificar o eliminar proyectos.
-- Validación de los tokens utilizados para compartir composiciones.
+## 13. Pruebas previstas
 
-Las solicitudes a los endpoints protegidos deberán incluir el token de autenticación en la cabecera HTTP:
+Durante el desarrollo se utiliza CURL para comprobar los endpoints. Los comandos y resultados se documentan en `docs/pruebas/curl.md`.
 
-```http
-Authorization: Bearer token_del_usuario
-```
+Se probará:
+- Registro e inicio de sesión de usuarios.
+- Creación y consulta de proyectos.
+- Creación y consulta de secciones, progresiones y acordes.
+- Generación de acordes y progresiones.
+- Persistencia de la información en MySQL.
+- Casos de error: datos inválidos, correo repetido, recurso inexistente y falta de autenticación.
 
-Para los proyectos compartidos, el backend verificará el token del enlace y el permiso asociado antes de permitir el acceso.
-
-## 13. Comunicación entre frontend y backend
-
-El frontend utilizará Fetch API para realizar solicitudes HTTP al backend y recibir respuestas en formato JSON.
-
-Ejemplo de consulta de proyectos:
-
-```javascript
-fetch("http://localhost:8080/api/proyectos", {
-    method: "GET",
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer token_del_usuario"
-    }
-})
-.then(response => response.json())
-.then(datos => {
-    console.log(datos);
-})
-.catch(error => {
-    console.error("Error:", error);
-});
-```
-
-El backend procesará las solicitudes mediante Spring Boot y devolverá los resultados correspondientes.
-
-La reproducción musical se realizará directamente desde el navegador mediante un sintetizador y los instrumentos virtuales seleccionados. La API proporcionará los datos musicales necesarios para dicha reproducción, mientras que el frontend se encargará de generar el audio.
-
-## 14. Pruebas de los servicios
-
-Durante el desarrollo se utilizará CURL para realizar solicitudes HTTP y comprobar el funcionamiento de los endpoints.
-
-Estas pruebas permitirán verificar:
-
-- El registro e inicio de sesión de usuarios.
-- La creación, consulta, modificación y eliminación de proyectos.
-- La administración de secciones y progresiones.
-- La generación de acordes y secuencias armónicas.
-- La persistencia de información en MySQL.
-- La validación de respuestas y códigos de estado HTTP.
-
-Posteriormente, los mismos servicios serán consumidos desde el frontend mediante Fetch API.
-
-## 15. Organización de la API en el backend
-
-La API se desarrollará utilizando Spring Boot y mantendrá una organización por responsabilidades:
-
-- **Controller:** recibe las solicitudes HTTP y devuelve las respuestas.
-- **Service:** contiene la lógica de negocio y el procesamiento de las operaciones.
-- **Repository:** realiza las consultas y operaciones sobre la base de datos mediante JPA e Hibernate.
-- **Entity:** representa las entidades almacenadas en MySQL.
-- **DTO:** define los datos que se reciben y envían mediante la API.
-
-Esta organización permitirá mantener separado el manejo de solicitudes, la lógica musical y el acceso a la información.
-
-## 16. Consideraciones de implementación
-
-Los endpoints descritos representan el diseño inicial de la API REST de ChordLab. Durante el desarrollo podrán realizarse ajustes para mejorar la organización y el funcionamiento de los servicios.
-
-La implementación se realizará de manera incremental, comenzando con las operaciones básicas del backend y posteriormente incorporando la generación musical, la persistencia y la integración con el frontend.
-
-La API deberá funcionar desde el entorno WSL establecido para el proyecto y podrá probarse mediante CURL antes de integrarse completamente con las interfaces web.
-
-## 17. Resultado esperado
-
-Se espera contar con una API REST que permita conectar los diferentes módulos de ChordLab, administrar la información de los usuarios y sus proyectos, generar estructuras musicales y facilitar el almacenamiento y consulta de composiciones.
-
-Su implementación permitirá integrar el frontend, el backend y la base de datos en una aplicación web funcional.
+Las pruebas deberán documentar resultados exitosos y casos de error.
