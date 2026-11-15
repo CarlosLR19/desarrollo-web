@@ -20,13 +20,13 @@ Durante este periodo se completó la API REST del backend de ChordLab. Se realiz
 - Filtro por tipo de acorde en `GET /progresiones/{id}/acordes?tipo=`.
 - **Validación de respuestas HTTP:** manejo centralizado de errores en JSON para los códigos 400, 401, 403, 404, 405, 409, 415 y 500. Los errores internos se registran en el servidor sin exponer detalles al cliente.
 - Configuración de CORS para exponer la cabecera `X-Total-Count` al navegador.
-- Actualización de algunos GET y POST existentes. `<describir cuáles y qué cambió>`
+- Actualización de algunos GET y POST existentes.
 - **Pruebas de persistencia:** reinicio del backend y consulta de los datos en MySQL.
 - Script `pruebas/curl-entregable3.sh` con 39 pasos y 52 verificaciones automáticas (éxito y error).
 
 **Documentación**
 - `<Actualización de 04-api.md con los filtros, X-Total-Count y los códigos 405 y 415>`
-- Documentación del uso de IA de este periodo en `docs/IAG/Integrante1-César/Uso_02/` y registro de consultas de dudas en `r-ia-doc.md`.
+- Documentación del uso de IA de este periodo en `docs/IAG/Integrante1-César/reporte2/` y registro de consultas de dudas en `r-ia-doc.md`.
 - `<Actividades de Nino y Carlos>`
 
 # 2. Evidencias de trabajo
@@ -121,8 +121,3 @@ Las sesiones se documentan en `docs/IAG/` con el formato `r-ia-dev-sxx.md` (`doc
 - Integrar el frontend con la API real y probar el sistema completo desde WSL.
 - Actualizar `04-api.md` y el README con las instrucciones finales.
 - Preparar documentación final, video y releases de los hitos.
-
-## Observaciones adicionales
-- **Decisión técnica:** PUT reemplaza el recurso completo; los datos se validan igual que en la creación.
-- **Decisión técnica:** la paginación devuelve un arreglo y el total en la cabecera `X-Total-Count`, para no cambiar el formato de respuesta que ya consume el frontend.
-- Los campos entre `< >` se completarán cuando estén disponibles los commits y los avances de los demás integrantes.

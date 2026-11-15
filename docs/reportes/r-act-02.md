@@ -146,4 +146,3 @@ Las sesiones se documentan en `docs/IAG/` (César en `Integrante1-César/` y Nin
 - **Decisión técnica:** `spring.jpa.hibernate.ddl-auto=update` se usa solo en desarrollo. El esquema de referencia es `database/esquema.sql`.
 - **Decisión técnica:** el generador musical no guarda información. Solo calcula y devuelve JSON, y el usuario decide qué acordes guardar en su progresión.
 - La respuesta de cada acorde incluye `notasConOctava` (por ejemplo, `C4`, `E4`, `G4`) para que el frontend lo reproduzca directamente con Tone.js o Web Audio.
-- Los campos `<hash>` se completarán al subir los commits correspondientes.
