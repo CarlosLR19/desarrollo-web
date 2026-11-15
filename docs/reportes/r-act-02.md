@@ -41,8 +41,6 @@ Las contribuciones individuales se respaldan mediante el historial de commits de
 ## 2.1. Historial de contribuciones
 | Actividad | Integrante responsable | Commit |
 |---|---|---|
-| Frontend base (inicio, login, proyectos, generador) | César Rodrigo Díaz Hernández | `<hash>` |
-| Editor de proyecto | César Rodrigo Díaz Hernández | `<hash>` |
 | README y estructura de documentación de IA | César Rodrigo Díaz Hernández | `3c78e67` |
 | Proyecto Spring Boot y conexión a MySQL | César Rodrigo Díaz Hernández | `039f573`, `0cd0c55` |
 | Script de la base de datos MySQL | Carlos Vicente López Rosales | `c82ff83` |
