@@ -20,25 +20,24 @@ Durante este periodo se completó la API REST del backend de ChordLab. Se realiz
 - Filtro por tipo de acorde en `GET /progresiones/{id}/acordes?tipo=`.
 - **Validación de respuestas HTTP:** manejo centralizado de errores en JSON para los códigos 400, 401, 403, 404, 405, 409, 415 y 500. Los errores internos se registran en el servidor sin exponer detalles al cliente.
 - Configuración de CORS para exponer la cabecera `X-Total-Count` al navegador.
+- Actualización de algunos GET y POST existentes. `<describir cuáles y qué cambió>`
 - **Pruebas de persistencia:** reinicio del backend y consulta de los datos en MySQL.
 - Script `pruebas/curl-entregable3.sh` con 39 pasos y 52 verificaciones automáticas (éxito y error).
 
 **Documentación**
 - `<Actualización de 04-api.md con los filtros, X-Total-Count y los códigos 405 y 415>`
-- `<Documentación de uso de IA de este periodo en docs/IAG/>`
+- Documentación del uso de IA de este periodo en `docs/IAG/Integrante1-César/Uso_02/` y registro de consultas de dudas en `r-ia-doc.md`.
 - `<Actividades de Nino y Carlos>`
 
 # 2. Evidencias de trabajo
 Las contribuciones individuales se respaldan mediante el historial de commits del repositorio de GitHub.
 
 ## 2.1. Historial de contribuciones
+
 | Actividad | Integrante responsable | Commit |
 |---|---|---|
-| Script de pruebas CURL del entregable 3 | César Rodrigo Díaz Hernández | [`4010c04`](https://github.com/CarlosLR19/desarrollo-web/commit/4010c04) |
-| Validación de respuestas HTTP (405, 415, 409, 500) y cabecera `X-Total-Count` | César Rodrigo Díaz Hernández | `<hash>` |
-| actualizacion de algunos GET Y POST, IMPLEMENTACION DE PUT Y DELETE y filtros y manejo de codigos HTTP
- | César Rodrigo Díaz Hernández | `9601f3e` |
-| Filtros por nombre, tonalidad, escala y tipo de acorde, con paginación | César Rodrigo Díaz Hernández | `<hash>` |
+| Actualización de algunos GET y POST, implementación de PUT y DELETE, filtros y manejo de códigos HTTP | César Rodrigo Díaz Hernández | [`9601f3e`](https://github.com/CarlosLR19/desarrollo-web/commit/9601f3e) |
+| Reporte inicial y documentación de uso de IA (`docs/IAG/Integrante1-César/`) | César Rodrigo Díaz Hernández | [`1df78d3`](https://github.com/CarlosLR19/desarrollo-web/commit/1df78d3) |
 | `<Actividad de Nino>` | Nino Alessandro Navarro Lam | `<hash>` |
 | `<Actividad de Carlos>` | Carlos Vicente López Rosales | `<hash>` |
 
@@ -59,7 +58,7 @@ Las capturas se encuentran en `docs/evidencias/Entregable3/`.
 - **Conflicto de Git en `r-act-02.md`.** Dos integrantes editaron el mismo reporte y `git pull --rebase` produjo un conflicto. Se resolvió conservando la versión más completa y agregando los datos faltantes; después se continuó el rebase con `git rebase --continue`.
 - **Finales de línea en Windows.** Git avisó que reemplazaría LF por CRLF en un script de bash, lo que puede provocar errores al ejecutarlo en WSL. Se agregó la regla `*.sh text eol=lf` en `.gitattributes`.
 - **Fecha de actualización en la respuesta del PUT.** La respuesta de `PUT /proyectos/{id}` mostraba la fecha de actualización anterior, aunque el dato sí se guardaba (el GET siguiente la devolvía correcta). Se corrige forzando la escritura con `saveAndFlush`.
-- **Permisos en consultas anidadas.** Los GET y POST de secciones, progresiones y acordes aún no verifican al propietario del proyecto (RNF05). Los PUT y DELETE sí lo hacen. Se programará la corrección junto con la integración de JWT.
+- **Permisos en consultas anidadas.** Los GET y POST de secciones, progresiones y acordes aún no verifican al propietario del proyecto (RNF05). Los PUT y DELETE sí lo hacen. Se programará la corrección junto con la integración de JWT. `<El commit 9601f3e actualiza algunos GET y POST: si ya verifican al propietario, indicarlo y quitar este punto.>`
 - `<Otros problemas del equipo y su solución>`
 
 # 4. Avance funcional
@@ -88,8 +87,6 @@ Las capturas se encuentran en `docs/evidencias/Entregable3/`.
 - **Herramienta utilizada:** ChatGPT (OpenAI), modelo GPT-6, desde la interfaz web, Claude (Anthropic), modelo Claude Sonnet 5.5, desde la interfaz web.
 - **Actividad para la que se utilizó:** apoyo en la revisión y comprensión del backend existente, configuración de Spring Boot y conexión con MySQL, solución de problemas de autenticación, configuración del puerto 8090 sin modificar `application.properties` e identificación y prueba de endpoints REST y con Claude armó el script de pruebas CURL.
 - **Código o contenido generado:** comandos para ejecutar Spring Boot y administrar la conexión con MySQL, instrucciones para verificar controladores y rutas del backend, así como orientación para probar los endpoints de generación musical y pruebas/curl-entregable3.sh.
-- **Modificaciones realizadas por el equipo:** ajustes en las credenciales del usuario de MySQL, configuración del puerto de ejecución y verificación de la estructura y funcionamiento de los controladores existentes.
-- **Forma en que se verificó el resultado:** ejecución del backend desde WSL, conexión exitosa con MySQL, creación de tablas y relaciones mediante Hibernate, comprobación del inicio de Spring Boot en el puerto 8090 y consulta del endpoint `/api/musica/catalogo`, que devolvió correctamente una respuesta JSON. Ejecución de pruebas/curl-entregable3.sh contra el backend con MySQL (39 pasos, 52 verificaciones correctas) y consulta de los datos en MySQL antes y después de reiniciar el servidor
 
 **Nino Alessandro Navarro Lam**
 - `<Herramienta, actividad y verificación, o indicar que no se utilizó IA>`
@@ -97,7 +94,11 @@ Las capturas se encuentran en `docs/evidencias/Entregable3/`.
 **Carlos Vicente López Rosales**
 - `<Herramienta, actividad y verificación, o indicar que no se utilizó IA>`
 
-Las sesiones se documentan en `docs/IAG/` con el formato `r-ia-dev-sxx.md` (`<ruta del registro de este periodo>`).
+- **Modificaciones realizadas por el equipo:** ajustes en las credenciales del usuario de MySQL, configuración del puerto de ejecución y verificación de la estructura y funcionamiento de los controladores existentes.
+- **Forma en que se verificó el resultado:** ejecución del backend desde WSL, conexión exitosa con MySQL, creación de tablas y relaciones mediante Hibernate, comprobación del inicio de Spring Boot en el puerto 8090 y consulta del endpoint `/api/musica/catalogo`, que devolvió correctamente una respuesta JSON. Ejecución de pruebas/curl-entregable3.sh contra el backend con MySQL (39 pasos, 52 verificaciones correctas) y consulta de los datos en MySQL antes y después de reiniciar el servidor
+
+
+Las sesiones se documentan en `docs/IAG/` con el formato `r-ia-dev-sxx.md` (`docs/IAG/Integrante1-César/reporte2/`).
 
 # 6. Participación individual
 **César Rodrigo Díaz Hernández**
