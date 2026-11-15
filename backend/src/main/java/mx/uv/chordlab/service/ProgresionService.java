@@ -16,11 +16,14 @@ public class ProgresionService {
     private final ProgresionRepository progresiones;
     private final SeccionService seccionService;
     private final AcordeService acordeService;
+    private final ProyectoService proyectoService;
 
-    public ProgresionService(ProgresionRepository progresiones, SeccionService seccionService, AcordeService acordeService) {
+    public ProgresionService(ProgresionRepository progresiones, SeccionService seccionService,
+                             AcordeService acordeService, ProyectoService proyectoService) {
         this.progresiones = progresiones;
         this.seccionService = seccionService;
         this.acordeService = acordeService;
+        this.proyectoService = proyectoService;
     }
 
     @Transactional(readOnly = true)
@@ -45,7 +48,27 @@ public class ProgresionService {
     @Transactional(readOnly = true)
     public ProgresionResponse obtener(Integer idProgresion) {
         Progresion p = buscar(idProgresion);
-        return ProgresionResponse.de(p, acordeService.listar(idProgresion), null);
+        return ProgresionResponse.de(p, acordeService.listar(idProgresion, null), null);
+    }
+
+    @Transactional
+    public ProgresionResponse actualizar(Integer idProgresion, Integer idUsuario, ProgresionRequest req) {
+        Progresion p = buscarDelUsuario(idProgresion, idUsuario);
+        p.setNombre(req.nombre().trim());
+        p.setOrden(req.orden());
+        progresiones.save(p);
+        return ProgresionResponse.de(p, null, "Progresión actualizada correctamente");
+    }
+
+    @Transactional
+    public void eliminar(Integer idProgresion, Integer idUsuario) {
+        progresiones.delete(buscarDelUsuario(idProgresion, idUsuario));
+    }
+
+    private Progresion buscarDelUsuario(Integer idProgresion, Integer idUsuario) {
+        Progresion p = buscar(idProgresion);
+        proyectoService.buscarDelUsuario(p.getSeccion().getProyecto().getIdProyecto(), idUsuario);
+        return p;
     }
 
     @Transactional(readOnly = true)

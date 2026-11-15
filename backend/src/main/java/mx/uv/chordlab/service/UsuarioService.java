@@ -52,6 +52,15 @@ public class UsuarioService {
         return new PerfilResponse(u.getIdUsuario(), u.getNombre(), u.getCorreo(), u.getFechaRegistro());
     }
 
+    /** RF03: modifica los datos personales (por ahora el nombre) del usuario autenticado. */
+    @Transactional
+    public PerfilResponse actualizarPerfil(Integer idUsuario, ActualizarPerfilRequest req) {
+        Usuario u = buscar(idUsuario);
+        u.setNombre(req.nombre().trim());
+        usuarios.save(u);
+        return new PerfilResponse(u.getIdUsuario(), u.getNombre(), u.getCorreo(), u.getFechaRegistro());
+    }
+
     /** Busca al usuario que hace la petición; si no existe la petición no está autorizada. */
     @Transactional(readOnly = true)
     public Usuario buscar(Integer idUsuario) {

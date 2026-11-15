@@ -205,9 +205,9 @@ pedir "$API/progresiones/$PR1"; esperar 404
 pedir "$API/progresiones/$PR1/acordes"; esperar 404
 
 # ------------------------------------------------------------ resumen
-echo; echo "============================================================"
+
 echo "  RESULTADO: $OK correctas, $FALLO con fallo"
-echo "============================================================"
+
 echo
 echo "PRUEBA DE PERSISTENCIA (manual):"
 echo "  1. El proyecto $P2 ('Balada triste', usuario $A) quedó guardado."

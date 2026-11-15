@@ -40,6 +40,28 @@ public class SeccionService {
         return SeccionResponse.de(s, "Sección creada correctamente");
     }
 
+    @Transactional
+    public SeccionResponse actualizar(Integer idSeccion, Integer idUsuario, SeccionRequest req) {
+        Seccion s = buscarDelUsuario(idSeccion, idUsuario);
+        s.setNombre(req.nombre().trim());
+        s.setOrden(req.orden());
+        secciones.save(s);
+        return SeccionResponse.de(s, "Sección actualizada correctamente");
+    }
+
+    @Transactional
+    public void eliminar(Integer idSeccion, Integer idUsuario) {
+        secciones.delete(buscarDelUsuario(idSeccion, idUsuario));
+    }
+
+    /** Busca la sección y comprueba que su proyecto pertenece al usuario (RNF05). */
+    @Transactional(readOnly = true)
+    public Seccion buscarDelUsuario(Integer idSeccion, Integer idUsuario) {
+        Seccion s = buscar(idSeccion);
+        proyectoService.buscarDelUsuario(s.getProyecto().getIdProyecto(), idUsuario);
+        return s;
+    }
+
     @Transactional(readOnly = true)
     public Seccion buscar(Integer idSeccion) {
         return secciones.findById(idSeccion)

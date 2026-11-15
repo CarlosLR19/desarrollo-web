@@ -33,4 +33,17 @@ public class ProgresionController {
     public ProgresionResponse obtener(@PathVariable Integer id) {
         return service.obtener(id);
     }
+
+    @PutMapping("/progresiones/{id}")
+    public ProgresionResponse actualizar(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                         @PathVariable Integer id,
+                                         @Valid @RequestBody ProgresionRequest req) {
+        return service.actualizar(id, idUsuario, req);
+    }
+
+    @DeleteMapping("/progresiones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario, @PathVariable Integer id) {
+        service.eliminar(id, idUsuario);
+    }
 }

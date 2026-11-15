@@ -28,4 +28,17 @@ public class SeccionController {
     public SeccionResponse crear(@PathVariable Integer idProyecto, @Valid @RequestBody SeccionRequest req) {
         return service.crear(idProyecto, req);
     }
+
+    @PutMapping("/secciones/{id}")
+    public SeccionResponse actualizar(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                      @PathVariable Integer id,
+                                      @Valid @RequestBody SeccionRequest req) {
+        return service.actualizar(id, idUsuario, req);
+    }
+
+    @DeleteMapping("/secciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario, @PathVariable Integer id) {
+        service.eliminar(id, idUsuario);
+    }
 }

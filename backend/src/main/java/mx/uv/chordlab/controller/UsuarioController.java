@@ -31,4 +31,10 @@ public class UsuarioController {
     public PerfilResponse perfil(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario) {
         return service.perfil(idUsuario);
     }
+
+    @PutMapping("/perfil")
+    public PerfilResponse actualizarPerfil(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                           @Valid @RequestBody ActualizarPerfilRequest req) {
+        return service.actualizarPerfil(idUsuario, req);
+    }
 }
