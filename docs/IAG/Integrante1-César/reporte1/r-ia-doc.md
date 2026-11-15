@@ -1,6 +1,6 @@
 # r-ia-doc – Consultas de dudas (César Rodrigo Díaz Hernández)
 
-Consultas de apoyo para instalar MySQL dentro de WSL y configurar el proyecto Spring Boot de ChordLab. Herramienta: ChatGPT (OpenAI), modelo GPT-6. No se generó código de la aplicación en estas consultas.
+Consultas de apoyo para instalar MySQL dentro de WSL, generar el proyecto base de Spring Boot mediante Spring Initializr e incorporar correctamente sus archivos al proyecto ChordLab. Herramienta: ChatGPT (OpenAI), modelo GPT-6. No se generó código de la aplicación en estas consultas.
 
 | Fecha | Herramienta | Prompt original | Respuesta IA |
 |---|---|---|---|
@@ -10,4 +10,4 @@ Consultas de apoyo para instalar MySQL dentro de WSL y configurar el proyecto Sp
 
 ## Verificación
 
-Las consultas permitieron obtener instrucciones para instalar y ejecutar MySQL dentro de WSL, incorporar el proyecto generado desde Spring Initializr y organizar correctamente los archivos de Spring Boot dentro de la carpeta `backend/` de ChordLab.
+Las consultas permitieron obtener instrucciones para instalar y ejecutar MySQL dentro de WSL, generar el proyecto base desde Spring Initializr e incorporar y organizar correctamente sus archivos dentro de la carpeta `backend/` de ChordLab.

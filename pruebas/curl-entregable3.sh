@@ -208,11 +208,4 @@ pedir "$API/progresiones/$PR1/acordes"; esperar 404
 
 echo "  RESULTADO: $OK correctas, $FALLO con fallo"
 
-echo
-echo "PRUEBA DE PERSISTENCIA (manual):"
-echo "  1. El proyecto $P2 ('Balada triste', usuario $A) quedó guardado."
-echo "  2. Detén el backend (Ctrl+C) y vuelve a arrancarlo con ./mvnw spring-boot:run"
-echo "  3. Ejecuta:  curl -s $API/proyectos -H 'X-Usuario-Id: $A'"
-echo "     -> debe seguir apareciendo 'Balada triste' (los datos viven en MySQL, no en memoria)."
-echo "  4. En MySQL:  sudo mysql chordlab -e \"SELECT id_proyecto, nombre, tonalidad, escala FROM proyecto;\""
 [ "$FALLO" -eq 0 ]

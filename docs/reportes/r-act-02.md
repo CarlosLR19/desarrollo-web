@@ -106,8 +106,6 @@ Las capturas se encuentran en `docs/evidencias/`.
 - **Herramienta utilizada:** Claude (Anthropic), modelo Claude Sonnet 5.5, desde la interfaz web. ChatGPT (OpenAI), modelo GPT-6, para consultas de dudas.
 - **Actividad para la que se utilizó:** con Claude, generación del frontend base y del editor de proyecto, y apoyo para organizar la documentación (README y reporte). Con ChatGPT, instalación de MySQL en WSL e incorporación del proyecto de Spring Initializr.
 - **Código o contenido generado:** carpeta `frontend/` (HTML, CSS y JavaScript) y borradores de documentación en Markdown.
-- **Modificaciones realizadas por el equipo:** `<describir qué se ajustó, corrigió o cambió>`
-- **Forma en que se verificó el resultado:** `<describir: pruebas en el navegador, comparación con 04-api.md, capturas>`
 
 **Nino Alessandro Navarro Lam**
 - **Herramienta utilizada:** Claude Code (Anthropic), modelo Claude Opus 5.5.
