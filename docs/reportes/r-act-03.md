@@ -118,7 +118,7 @@ Las sesiones se documentan en `docs/IAG/` con el formato `r-ia-dev-sxx.md` (`doc
 - `Revisión y despliegue del esquema relacional (database/esquema.sql) en entorno WSL.
 - Validación de códigos de respuesta HTTP (200, 201, 401, 409) mediante pruebas CURL.
 - Pruebas de persistencia y verificación de integridad referencial en MySQL.
-- Documentación individual de uso de IA en docs/IAG/Integrante3-Carlos/r-ia-doc.md.
+- Documentación individual de uso de IA en docs/IAG/Integrante3-Carlos/r-ia-doc-01.md.
 
 # 7. Próximas actividades
 - Confirmar con el profesor el alcance de "observaciones" e implementarlas.

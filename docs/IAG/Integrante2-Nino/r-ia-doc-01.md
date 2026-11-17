@@ -1,21 +1,36 @@
-# Registro de uso de inteligencia artificial – Consultas de dudas
+# Reporte de Uso Documental en el Proyecto
 
-**Proyecto:** ChordLab  
-**Integrante:** Nino Alessandro Navarro Lam  
 **Fecha:** 13/11/2026  
-**Tipo de registro:** Consultas técnicas, explicaciones y resolución de dudas.
+**Número de reporte:** 01  
+**Integrante:** Nino Alessandro Navarro Lam  
+**Entregable:** 2 – Backend básico (reporte de actividades R2)
 
 ---
 
+# 1. Breve descripción de uso
+
+Las consultas tuvieron como objetivo resolver dudas técnicas y entender el funcionamiento del backend de ChordLab. Se consultó cómo configurar Java 17 en WSL para que el proyecto compilara con el JDK instalado, cómo están organizados el proyecto Spring Boot, la base de datos y su integración, y cuáles son los fundamentos de teoría musical que usa `TeoriaMusicalService` para generar acordes, inversiones, escalas y progresiones.
+
+---
+
+# 2. Evidencias de uso
+
+| Fecha | Herramienta | Enlace a prompt | Enlace a respuesta |
+|------------|------------------------|-----------------|-------|
+| 13/11/2026 | ChatGPT | [Prompt 1](#prompt-1) | [Respuesta 1](#respuesta-1) |
+| 13/11/2026 | Claude (Anthropic) | [Prompt 2](#prompt-2) | [Respuesta 2](#respuesta-2) |
+| 13/11/2026 | Claude (Anthropic) | [Prompt 3](#prompt-3) | [Respuesta 3](#respuesta-3) |
+| 13/11/2026 | Claude (Anthropic) | [Prompt 4](#prompt-4) | [Respuesta 4](#respuesta-4) |
+
+> El prompt y la respuesta se copian como subsecciones y se enlazan desde la tabla.
+
 ## Consulta 1. Configuración de Java 17 en WSL
 
-**Herramienta utilizada:** ChatGPT
-
-**Pregunta realizada:**
+### Prompt 1
 
 ¿Cómo cambio Java 21 a Java 17? En WSL solamente tengo instalado JDK 17 y con Java 21 no compilaba. ¿Spring Boot 4 funciona con Java 17?
 
-**Respuesta obtenida:**
+### Respuesta 1
 
 Spring Boot 4 es compatible con Java 17, ya que esta versión es el requisito mínimo para ejecutar el framework. Por lo tanto, es posible desarrollar el proyecto ChordLab utilizando JDK 17.
 
@@ -28,21 +43,17 @@ Para realizar el cambio se deben seguir estos pasos:
 5. Modificar el archivo `pom.xml` y establecer `<java.version>17</java.version>`.
 6. Ejecutar `mvn clean compile` o `./mvnw clean compile` para comprobar que el proyecto compile correctamente.
 
-**Aplicación en el proyecto:**
-
-La consulta permitió identificar cómo configurar el entorno de desarrollo de WSL para utilizar una versión de Java compatible con el JDK disponible. Se decidió utilizar Java 17 para mantener una configuración uniforme entre el entorno de desarrollo y Spring Boot.
+**Aplicación en el proyecto:** la consulta permitió identificar cómo configurar el entorno de desarrollo de WSL para utilizar una versión de Java compatible con el JDK disponible. Se decidió utilizar Java 17 para mantener una configuración uniforme entre el entorno de desarrollo y Spring Boot.
 
 ---
 
 ## Consulta 2. Explicación detallada de los componentes desarrollados
 
-**Herramienta utilizada:** Claude (Anthropic) / Claude Pro
-
-**Pregunta realizada:**
+### Prompt 2
 
 Explícame más a detalle la parte que hicimos nosotros.
 
-**Respuesta obtenida:**
+### Respuesta 2
 
 Claude explicó la organización y el funcionamiento de los componentes desarrollados para ChordLab, revisando principalmente tres áreas:
 
@@ -72,21 +83,17 @@ Se explicó cómo las entidades de Java representan las tablas de MySQL mediante
 
 También se revisó la relación entre los controladores, servicios, repositorios y entidades, así como la manera en que las solicitudes HTTP llegan al backend y se procesan antes de consultar o modificar la información almacenada.
 
-**Aplicación en el proyecto:**
-
-La explicación permitió comprender mejor la estructura interna del sistema, la función de cada archivo y la comunicación entre los componentes. Esto facilitó la identificación de responsabilidades y la comprensión del funcionamiento general del backend.
+**Aplicación en el proyecto:** la explicación permitió comprender mejor la estructura interna del sistema, la función de cada archivo y la comunicación entre los componentes. Esto facilitó la identificación de responsabilidades y la comprensión del funcionamiento general del backend.
 
 ---
 
 ## Consulta 3. Explicación de la lógica musical
 
-**Herramienta utilizada:** Claude (Anthropic) / Claude Pro
-
-**Pregunta realizada:**
+### Prompt 3
 
 Explícame lo de la parte musical.
 
-**Respuesta obtenida:**
+### Respuesta 3
 
 Claude explicó los fundamentos de teoría musical necesarios para comprender la implementación de la clase `TeoriaMusicalService.java`.
 
@@ -128,21 +135,17 @@ Se explicó cómo construir escalas mayores y menores mediante patrones de inter
 
 Se revisaron ejemplos de progresiones para estilos pop, clásico, jazz y blues, además de la utilización de reglas de armonía funcional para generar secuencias musicales.
 
-**Aplicación en el proyecto:**
-
-La consulta permitió comprender los fundamentos musicales que utiliza el algoritmo para generar acordes y progresiones, así como la relación entre la teoría musical y su representación mediante estructuras de datos y operaciones en Java.
+**Aplicación en el proyecto:** la consulta permitió comprender los fundamentos musicales que utiliza el algoritmo para generar acordes y progresiones, así como la relación entre la teoría musical y su representación mediante estructuras de datos y operaciones en Java.
 
 ---
 
 ## Consulta 4. Implementación de acordes, séptimas, inversiones y progresiones
 
-**Herramienta utilizada:** Claude (Anthropic) / Claude Pro
-
-**Pregunta realizada:**
+### Prompt 4
 
 ¿Cómo implemento correctamente la parte musical? Los acordes, séptima, mayor, menor e inversiones.
 
-**Respuesta obtenida:**
+### Respuesta 4
 
 Claude proporcionó una explicación técnica sobre cómo organizar el motor musical de ChordLab para que los diferentes tipos de acordes puedan generarse mediante un mismo algoritmo.
 
@@ -221,22 +224,16 @@ Se recomendó validar las notas, tipos de acordes e inversiones solicitadas, evi
 
 También se propusieron pruebas para comprobar los resultados de los acordes, las escalas, las inversiones y las progresiones generadas.
 
-**Aplicación en el proyecto:**
-
-La información permitió definir una lógica musical organizada y reutilizable para ChordLab. Se identificaron las estructuras y operaciones necesarias para generar acordes, calcular inversiones, construir progresiones y preparar las notas que posteriormente serán reproducidas mediante el frontend.
+**Aplicación en el proyecto:** la información permitió definir una lógica musical organizada y reutilizable para ChordLab. Se identificaron las estructuras y operaciones necesarias para generar acordes, calcular inversiones, construir progresiones y preparar las notas que posteriormente serán reproducidas mediante el frontend.
 
 ---
 
-## 5. Reflexión general del uso de IA
+## Observaciones adicionales
 
-Las consultas realizadas mediante ChatGPT y Claude permitieron resolver dudas relacionadas con la configuración del entorno de desarrollo, la estructura de Spring Boot, la conexión con MySQL y los fundamentos de la implementación musical.
+Las consultas realizadas mediante ChatGPT y Claude permitieron resolver dudas relacionadas con la configuración del entorno de desarrollo, la estructura de Spring Boot, la conexión con MySQL y los fundamentos de la implementación musical. Las herramientas se utilizaron principalmente para obtener explicaciones técnicas y comprender cómo organizar las funcionalidades del sistema.
 
-Las herramientas se utilizaron principalmente para obtener explicaciones técnicas y comprender cómo organizar las funcionalidades del sistema.
+La información obtenida se utilizó como apoyo para tomar decisiones de desarrollo y comprender los procedimientos necesarios para implementar las características de ChordLab. Los resultados se comprobaron con las pruebas unitarias y con el script de pruebas CURL del Entregable 2.
 
-La información obtenida fue utilizada como apoyo para tomar decisiones de desarrollo y comprender los procedimientos necesarios para implementar las características de ChordLab. Los resultados deberán revisarse y comprobarse durante las pruebas del proyecto.
+La generación del código del backend con Claude Code se registra por separado en [r-ia-dev-01.md](r-ia-dev-01.md).
 
-**Herramientas registradas:**
-- ChatGPT.
-- Claude (Anthropic), incluyendo Claude Pro.
-
-**Responsable del registro:** Nino Alessandro Navarro Lam.
+**Herramientas registradas:** ChatGPT (OpenAI) y Claude (Anthropic).

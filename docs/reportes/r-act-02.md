@@ -44,12 +44,12 @@ Las contribuciones individuales se respaldan mediante el historial de commits de
 | README y estructura de documentación de IA | César Rodrigo Díaz Hernández | `3c78e67` |
 | Proyecto Spring Boot y conexión a MySQL | César Rodrigo Díaz Hernández | `039f573`, `0cd0c55` |
 | Script de la base de datos MySQL | Carlos Vicente López Rosales | `c82ff83` |
-| Entidades JPA y repositorios | Carlos Vicente López Rosales | `<hash>` |
-| Configuración de la API (puerto 8080, ruta `/api`, CORS, BCrypt) y manejo de errores | Nino Alessandro Navarro Lam | `<hash>` |
-| POST y GET de usuarios y proyectos | Nino Alessandro Navarro Lam | `<hash>` |
-| POST y GET de secciones, progresiones y acordes | Nino Alessandro Navarro Lam | `<hash>` |
-| Generador de acordes y progresiones, y pruebas unitarias | Nino Alessandro Navarro Lam | `<hash>` |
-| Script de pruebas CURL y evidencias del backend en WSL | Nino Alessandro Navarro Lam | `<hash>` |
+| Entidades JPA y repositorios | Carlos Vicente López Rosales | [`a8325c5`](https://github.com/CarlosLR19/desarrollo-web/commit/a8325c5) |
+| Configuración de la API (puerto 8080, ruta `/api`, CORS, BCrypt) y manejo de errores | Nino Alessandro Navarro Lam | [`a8325c5`](https://github.com/CarlosLR19/desarrollo-web/commit/a8325c5) |
+| POST y GET de usuarios y proyectos | Nino Alessandro Navarro Lam | [`a8325c5`](https://github.com/CarlosLR19/desarrollo-web/commit/a8325c5) |
+| POST y GET de secciones, progresiones y acordes | Nino Alessandro Navarro Lam | [`a8325c5`](https://github.com/CarlosLR19/desarrollo-web/commit/a8325c5) |
+| Generador de acordes y progresiones, y pruebas unitarias | Nino Alessandro Navarro Lam | [`a8325c5`](https://github.com/CarlosLR19/desarrollo-web/commit/a8325c5) |
+| Script de pruebas CURL y evidencias del backend en WSL | Nino Alessandro Navarro Lam | [`a8325c5`](https://github.com/CarlosLR19/desarrollo-web/commit/a8325c5) |
 
 ## 2.2. Evidencias visuales
 | Archivo | Descripción |
@@ -114,7 +114,7 @@ Las capturas se encuentran en `docs/evidencias/`.
 - **Modificaciones realizadas por el equipo:** el código se adaptó al proyecto Spring Boot 4 creado por César. Se ajustaron la versión de Java, el puerto y la ruta base en `pom.xml` y `application.properties`.
 - **Forma en que se verificó el resultado:** compilación en WSL, `mvn test -Dtest=TeoriaMusicalServiceTest` (10 pruebas sin fallos), ejecución de `pruebas/curl-entregable2.sh` comparando el código HTTP esperado con el obtenido en los 24 casos, y consulta de los registros guardados en MySQL.
 
-Las sesiones se documentan en `docs/IAG/` (César en `Integrante1-César/` y Nino en `Integrante2-Nino/Uso_01/`, con el formato `r-ia-dev-s01.md`).
+Las sesiones se documentan en `docs/IAG/` (César en `Integrante1-César/` y Nino en `Integrante2-Nino/r-ia-dev-01.md` y `r-ia-doc-01.md`).
 
 # 6. Participación individual
 **César Rodrigo Díaz Hernández**
