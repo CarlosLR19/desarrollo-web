@@ -28,6 +28,7 @@ Durante este periodo se completó la API REST del backend de ChordLab. Se realiz
 - `<Actualización de 04-api.md con los filtros, X-Total-Count y los códigos 405 y 415>`
 - Documentación del uso de IA de este periodo en `docs/IAG/Integrante1-César/reporte2/` y registro de consultas de dudas en `r-ia-doc.md`.
 - `<Actividades de Nino y Carlos>`
+- Validación de estructura de base de datos (database/esquema.sql), ejecución de pruebas de validación HTTP y verificación de persistencia en MySQL por Carlos Vicente López Rosales.
 
 # 2. Evidencias de trabajo
 Las contribuciones individuales se respaldan mediante el historial de commits del repositorio de GitHub.
@@ -39,7 +40,7 @@ Las contribuciones individuales se respaldan mediante el historial de commits de
 | Actualización de algunos GET y POST, implementación de PUT y DELETE, filtros y manejo de códigos HTTP | César Rodrigo Díaz Hernández | [`9601f3e`](https://github.com/CarlosLR19/desarrollo-web/commit/9601f3e) |
 | Reporte inicial y documentación de uso de IA (`docs/IAG/Integrante1-César/`) | César Rodrigo Díaz Hernández | [`1df78d3`](https://github.com/CarlosLR19/desarrollo-web/commit/1df78d3) |
 | `<Actividad de Nino>` | Nino Alessandro Navarro Lam | `<hash>` |
-| `<Actividad de Carlos>` | Carlos Vicente López Rosales | `<hash>` |
+| Validación de esquema SQL, pruebas de persistencia en MySQL y documentación de uso de IA (docs/IAG/Integrante3-Carlos/) | Carlos Vicente López Rosales |  [`639ff09`] |
 
 ## 2.2. Evidencias visuales
 | Archivo | Descripción |
@@ -50,6 +51,7 @@ Las contribuciones individuales se respaldan mediante el historial de commits de
 | E3_04_Curl_Resultado.png | Resumen final: 52 verificaciones correctas, 0 con fallo. |
 | E3_05_Persistencia_MySQL.png | Consulta a la tabla `proyecto` en MySQL con los datos guardados. |
 | E3_06_Persistencia_Reinicio.png | Consulta de proyectos después de reiniciar el backend. |
+| E3_Carlos_Persistencia_MySQL.png | Verificación de persistencia de usuarios y proyectos en MySQL desde WSL. |
 
 Las capturas se encuentran en `docs/evidencias/Entregable3/`.
 
@@ -92,10 +94,12 @@ Las capturas se encuentran en `docs/evidencias/Entregable3/`.
 - `<Herramienta, actividad y verificación, o indicar que no se utilizó IA>`
 
 **Carlos Vicente López Rosales**
-- `<Herramienta, actividad y verificación, o indicar que no se utilizó IA>`
+- **Herramienta utilizada:** Gemini (Google).
+- **Actividad para la que se utilizó:** resolución de problemas de configuración de MySQL en WSL, creación de usuario y base de datos chordlab, configuración de variables de entorno para Spring Boot (DB_PASSWORD, SERVER_PORT), diseño de pruebas CURL para validación de códigos HTTP y comprobación de persistencia en MySQL.
+- **Código o contenido generado:** comandos de administración de MySQL en Linux, comandos curl -i para validar respuestas HTTP (200, 201, 401, 409) y consultas SQL de verificación.
 
-- **Modificaciones realizadas por el equipo:** ajustes en las credenciales del usuario de MySQL, configuración del puerto de ejecución y verificación de la estructura y funcionamiento de los controladores existentes.
-- **Forma en que se verificó el resultado:** ejecución del backend desde WSL, conexión exitosa con MySQL, creación de tablas y relaciones mediante Hibernate, comprobación del inicio de Spring Boot en el puerto 8090 y consulta del endpoint `/api/musica/catalogo`, que devolvió correctamente una respuesta JSON. Ejecución de pruebas/curl-entregable3.sh contra el backend con MySQL (39 pasos, 52 verificaciones correctas) y consulta de los datos en MySQL antes y después de reiniciar el servidor
+- **Modificaciones realizadas por el equipo:** ajustes en las credenciales del usuario de MySQL, configuración del puerto de ejecución y verificación de la estructura y funcionamiento de los controladores existentes. Configuración del entorno local en WSL, ejecución del esquema SQL y pruebas de persistencia contra la instancia local de MySQL.
+- **Forma en que se verificó el resultado:** ejecución del backend desde WSL, conexión exitosa con MySQL, creación de tablas y relaciones mediante Hibernate, comprobación del inicio de Spring Boot en el puerto 8090 y consulta del endpoint `/api/musica/catalogo`, que devolvió correctamente una respuesta JSON. Ejecución de pruebas/curl-entregable3.sh contra el backend con MySQL (39 pasos, 52 verificaciones correctas) y consulta de los datos en MySQL antes y después de reiniciar el servidor. Arranque del servidor Spring Boot en el puerto 8090 sin errores, ejecución de peticiones CURL comprobando encabezados HTTP y consulta directa a las tablas de MySQL verificando los registros persistidos. 
 
 
 Las sesiones se documentan en `docs/IAG/` con el formato `r-ia-dev-sxx.md` (`docs/IAG/Integrante1-César/reporte2/`).
@@ -111,7 +115,10 @@ Las sesiones se documentan en `docs/IAG/` con el formato `r-ia-dev-sxx.md` (`doc
 - `<Tareas realizadas en este periodo>`
 
 **Carlos Vicente López Rosales**
-- `<Tareas realizadas en este periodo>`
+- `Revisión y despliegue del esquema relacional (database/esquema.sql) en entorno WSL.
+- Validación de códigos de respuesta HTTP (200, 201, 401, 409) mediante pruebas CURL.
+- Pruebas de persistencia y verificación de integridad referencial en MySQL.
+- Documentación individual de uso de IA en docs/IAG/Integrante3-Carlos/r-ia-doc.md.
 
 # 7. Próximas actividades
 - Confirmar con el profesor el alcance de "observaciones" e implementarlas.
