@@ -24,7 +24,7 @@ La herramienta agregó la verificación de propietario en esos 7 endpoints, actu
 | Prompt original | [Ver prompt](#prompt-original) |
 | Respuesta de IA | [Ver respuesta](#respuesta-de-ia) |
 | Código anterior | Commit [`e475549`](https://github.com/CarlosLR19/desarrollo-web/commit/e475549) |
-| Código posterior | Commit [`<hash>`](https://github.com/CarlosLR19/desarrollo-web/commit/<hash>) |
+| Código posterior | Commit [`c0eb130`](https://github.com/CarlosLR19/desarrollo-web/commit/c0eb130) |
 | Diferencias entre versiones | [Ver salida de `git diff --numstat`](#diferencias-entre-versiones) |
 | Prueba de funcionamiento | [Ver pruebas](#prueba-de-funcionamiento) |
 | Código de uso | Revisión / Depuración / Modificación / Pruebas |
@@ -55,7 +55,8 @@ Prompts de seguimiento de la misma sesión:
 ## Diferencias entre versiones
 
 ```
-$ git diff --numstat e475549 <hash>
+$ git diff --numstat e475549 c0eb130
+2	0	.gitattributes
 7	4	backend/src/main/java/mx/uv/chordlab/controller/AcordeController.java
 10	6	backend/src/main/java/mx/uv/chordlab/controller/ProgresionController.java
 7	4	backend/src/main/java/mx/uv/chordlab/controller/SeccionController.java
@@ -86,7 +87,7 @@ Resultado: **60 correctas, 0 con fallo**. Antes eran 52; las 8 nuevas correspond
 
 Además, `./mvnw test -Dtest=TeoriaMusicalServiceTest` da 10 pruebas sin fallos, y `curl-entregable2.sh` solo devuelve error en los casos que esperan error.
 
-`<Agregar captura del resumen del script y de los pasos 12a a 12g ejecutados contra MySQL.>`
+![Pasos 12a a 12g y resumen del script](../../../evidencias/entregable3/E3_Nino_Permisos.jpeg)
 
 ## Reflexión del estudiante
 

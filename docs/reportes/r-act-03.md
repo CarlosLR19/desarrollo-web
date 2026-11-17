@@ -41,14 +41,14 @@ Las contribuciones individuales se respaldan mediante el historial de commits de
 | Reporte inicial y documentación de uso de IA (`docs/IAG/Integrante1-César/`) | César Rodrigo Díaz Hernández | [`1df78d3`](https://github.com/CarlosLR19/desarrollo-web/commit/1df78d3) |
 | Validación de esquema SQL, pruebas de persistencia en MySQL y documentación de uso de IA (`docs/IAG/Integrante3-Carlos/`) | Carlos Vicente López Rosales | [`601d383`](https://github.com/CarlosLR19/desarrollo-web/commit/601d383) |
 | Registros de IA (`r-ia-dev` y `r-ia-doc`)  y enlaces a commits en `r-act-02` | Nino Alessandro Navarro Lam | [`e475549`](https://github.com/CarlosLR19/desarrollo-web/commit/e475549) |
-| Verificación de propietario en los GET y POST anidados (RNF05) y pruebas de permisos en los scripts CURL | Nino Alessandro Navarro Lam | [`<c0eb130>`](https://github.com/CarlosLR19/desarrollo-web/commit/<hash>) |
+| Verificación de propietario en los GET y POST anidados (RNF05) y pruebas de permisos en los scripts CURL | Nino Alessandro Navarro Lam | [`c0eb130`](https://github.com/CarlosLR19/desarrollo-web/commit/c0eb130) |
 
 ## 2.2. Evidencias visuales
 | Archivo | Descripción |
 |---|---|
 | [curlPostAndDelete.png](../evidencias/entregable3/curlPostAndDelete.png) | Pruebas CURL de POST y DELETE. |
 | [E3_Carlos_Persistencia_MySQL.png](../evidencias/entregable3/E3_Carlos_Persistencia_MySQL.png) | Verificación de persistencia de usuarios y proyectos en MySQL desde WSL. |
-| [E3_Nino_Permisos.png](../evidencias/entregable3/E3_Nino_Permisos.png) | Pasos 12a a 12g del script (403 y 401 en los GET y POST anidados) y resumen final: 60 verificaciones correctas, 0 con fallo. |
+| [E3_Nino_Permisos.jpeg](../evidencias/entregable3/E3_Nino_Permisos.jpeg) | Pasos 12a a 12g del script (403 y 401 en los GET y POST anidados) y resumen final: 60 verificaciones correctas, 0 con fallo. |
 
 Las capturas se encuentran en `docs/evidencias/entregable3/`.
 
