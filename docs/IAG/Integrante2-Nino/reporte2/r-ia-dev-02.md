@@ -91,7 +91,7 @@ Además, `./mvnw test -Dtest=TeoriaMusicalServiceTest` da 10 pruebas sin fallos,
 
 ## Reflexión del estudiante
 
-`<Escríbela con tus palabras: qué problema había, por qué era grave que otro usuario pudiera ver o modificar un proyecto ajeno, cómo se resolvió con buscarDelUsuario y la cabecera, por qué no se pudo inyectar ProgresionService en AcordeService, y cómo lo comprobaste.>`
+`<En esta entrega la IA fue de gran ayua para saber como implementar la verificacion del propietario para GET y POST reutilizando los de PUT y DELETE.>`
 
 ---
 
