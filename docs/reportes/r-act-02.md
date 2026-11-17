@@ -114,7 +114,7 @@ Las capturas se encuentran en `docs/evidencias/`.
 - **Modificaciones realizadas por el equipo:** el código se adaptó al proyecto Spring Boot 4 creado por César. Se ajustaron la versión de Java, el puerto y la ruta base en `pom.xml` y `application.properties`.
 - **Forma en que se verificó el resultado:** compilación en WSL, `mvn test -Dtest=TeoriaMusicalServiceTest` (10 pruebas sin fallos), ejecución de `pruebas/curl-entregable2.sh` comparando el código HTTP esperado con el obtenido en los 24 casos, y consulta de los registros guardados en MySQL.
 
-Las sesiones se documentan en `docs/IAG/` (César en `Integrante1-César/` y Nino en `Integrante2-Nino/r-ia-dev-01.md` y `r-ia-doc-01.md`).
+Las sesiones se documentan en `docs/IAG/` (César en `Integrante1-César/` y Nino en `Integrante2-Nino/reporte1/`).
 
 # 6. Participación individual
 **César Rodrigo Díaz Hernández**
