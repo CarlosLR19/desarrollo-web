@@ -19,19 +19,23 @@ public class ProgresionController {
     }
 
     @GetMapping("/secciones/{idSeccion}/progresiones")
-    public List<ProgresionResponse> listar(@PathVariable Integer idSeccion) {
-        return service.listar(idSeccion);
+    public List<ProgresionResponse> listar(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                           @PathVariable Integer idSeccion) {
+        return service.listar(idSeccion, idUsuario);
     }
 
     @PostMapping("/secciones/{idSeccion}/progresiones")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProgresionResponse crear(@PathVariable Integer idSeccion, @Valid @RequestBody ProgresionRequest req) {
-        return service.crear(idSeccion, req);
+    public ProgresionResponse crear(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                    @PathVariable Integer idSeccion,
+                                    @Valid @RequestBody ProgresionRequest req) {
+        return service.crear(idSeccion, idUsuario, req);
     }
 
     @GetMapping("/progresiones/{id}")
-    public ProgresionResponse obtener(@PathVariable Integer id) {
-        return service.obtener(id);
+    public ProgresionResponse obtener(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                      @PathVariable Integer id) {
+        return service.obtener(id, idUsuario);
     }
 
     @PutMapping("/progresiones/{id}")

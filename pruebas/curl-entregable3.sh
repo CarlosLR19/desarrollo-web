@@ -53,18 +53,18 @@ P1=$(extraer idProyecto)
 pedir -X POST "$API/proyectos" -H "$JSON" -H "X-Usuario-Id: $A" \
   -d '{"nombre":"Balada triste","tonalidad":"A","escala":"menor","tempo":70,"compasNum":3,"compasDen":4}'
 P2=$(extraer idProyecto)
-pedir -X POST "$API/proyectos/$P1/secciones" -H "$JSON" -d '{"nombre":"Verso","orden":1}'
+pedir -X POST "$API/proyectos/$P1/secciones" -H "$JSON" -H "X-Usuario-Id: $A" -d '{"nombre":"Verso","orden":1}'
 S1=$(extraer idSeccion)
-pedir -X POST "$API/proyectos/$P1/secciones" -H "$JSON" -d '{"nombre":"Coro","orden":2}'
+pedir -X POST "$API/proyectos/$P1/secciones" -H "$JSON" -H "X-Usuario-Id: $A" -d '{"nombre":"Coro","orden":2}'
 S2=$(extraer idSeccion)
-pedir -X POST "$API/secciones/$S1/progresiones" -H "$JSON" -d '{"nombre":"Principal","orden":1}'
+pedir -X POST "$API/secciones/$S1/progresiones" -H "$JSON" -H "X-Usuario-Id: $A" -d '{"nombre":"Principal","orden":1}'
 PR1=$(extraer idProgresion)
-pedir -X POST "$API/secciones/$S2/progresiones" -H "$JSON" -d '{"nombre":"Estribillo","orden":1}'
+pedir -X POST "$API/secciones/$S2/progresiones" -H "$JSON" -H "X-Usuario-Id: $A" -d '{"nombre":"Estribillo","orden":1}'
 PR2=$(extraer idProgresion)
-pedir -X POST "$API/progresiones/$PR1/acordes" -H "$JSON" \
+pedir -X POST "$API/progresiones/$PR1/acordes" -H "$JSON" -H "X-Usuario-Id: $A" \
   -d '{"fundamental":"C","tipo":"mayor","inversion":0,"duracionPulsos":4,"orden":1}'
 AC1=$(extraer idAcorde)
-pedir -X POST "$API/progresiones/$PR1/acordes" -H "$JSON" \
+pedir -X POST "$API/progresiones/$PR1/acordes" -H "$JSON" -H "X-Usuario-Id: $A" \
   -d '{"fundamental":"A","tipo":"menor","inversion":0,"duracionPulsos":4,"orden":2}'
 AC2=$(extraer idAcorde)
 echo "Proyectos $P1 y $P2 | Secciones $S1, $S2 | Progresiones $PR1, $PR2 | Acordes $AC1, $AC2"
@@ -102,10 +102,34 @@ pedir "$API/proyectos?pagina=0&limite=1" -H "X-Usuario-Id: $A"; esperar 200; esp
 curl -s -D - -o /dev/null "$API/proyectos?pagina=0&limite=1" -H "X-Usuario-Id: $A" | grep -i "x-total-count"
 
 paso "11. Filtro de acordes por tipo: ?tipo=menor (esperado 200 y 1 acorde)"
-pedir "$API/progresiones/$PR1/acordes?tipo=menor"; esperar 200; esperar_cuantos idAcorde 1
+pedir "$API/progresiones/$PR1/acordes?tipo=menor" -H "X-Usuario-Id: $A"; esperar 200; esperar_cuantos idAcorde 1
 
 paso "12. Filtro de acordes con tipo inválido (esperado 400)"
-pedir "$API/progresiones/$PR1/acordes?tipo=xyz"; esperar 400
+pedir "$API/progresiones/$PR1/acordes?tipo=xyz" -H "X-Usuario-Id: $A"; esperar 400
+
+# ------------------------------------------------------------ permisos en GET y POST anidados (RNF05)
+
+paso "12a. Usuario B lista las secciones del proyecto de A (esperado 403)"
+pedir "$API/proyectos/$P1/secciones" -H "X-Usuario-Id: $B"; esperar 403
+
+paso "12b. Listar secciones sin cabecera (esperado 401)"
+pedir "$API/proyectos/$P1/secciones"; esperar 401
+
+paso "12c. Usuario B agrega una sección al proyecto de A (esperado 403)"
+pedir -X POST "$API/proyectos/$P1/secciones" -H "$JSON" -H "X-Usuario-Id: $B" -d '{"nombre":"Intruso","orden":9}'; esperar 403
+
+paso "12d. Usuario B lista las progresiones de una sección de A (esperado 403)"
+pedir "$API/secciones/$S1/progresiones" -H "X-Usuario-Id: $B"; esperar 403
+
+paso "12e. Usuario B consulta una progresión de A (esperado 403)"
+pedir "$API/progresiones/$PR1" -H "X-Usuario-Id: $B"; esperar 403
+
+paso "12f. Usuario B agrega un acorde a la progresión de A (esperado 403)"
+pedir -X POST "$API/progresiones/$PR1/acordes" -H "$JSON" -H "X-Usuario-Id: $B" \
+  -d '{"fundamental":"C","tipo":"mayor","inversion":0,"duracionPulsos":4,"orden":9}'; esperar 403
+
+paso "12g. Usuario A sigue viendo sus secciones (esperado 200 y 2 secciones)"
+pedir "$API/proyectos/$P1/secciones" -H "X-Usuario-Id: $A"; esperar 200; esperar_cuantos idSeccion 2
 
 # ------------------------------------------------------------ PUT
 paso "13. PUT proyecto (esperado 200)"
@@ -185,7 +209,7 @@ pedir -X DELETE "$API/acordes/$AC1" -H "X-Usuario-Id: $A"; esperar 404
 
 paso "34. DELETE progresión (esperado 204) y su GET posterior (esperado 404)"
 pedir -X DELETE "$API/progresiones/$PR2" -H "X-Usuario-Id: $A"; esperar 204
-pedir "$API/progresiones/$PR2"; esperar 404
+pedir "$API/progresiones/$PR2" -H "X-Usuario-Id: $A"; esperar 404
 
 paso "35. DELETE sección (esperado 204)"
 pedir -X DELETE "$API/secciones/$S2" -H "X-Usuario-Id: $A"; esperar 204
@@ -201,8 +225,8 @@ pedir -X DELETE "$API/proyectos/$P1" -H "X-Usuario-Id: $A"; esperar 204
 
 paso "39. Cascada: el proyecto, su progresión y su acorde ya no existen (esperado 404 x3)"
 pedir "$API/proyectos/$P1" -H "X-Usuario-Id: $A"; esperar 404
-pedir "$API/progresiones/$PR1"; esperar 404
-pedir "$API/progresiones/$PR1/acordes"; esperar 404
+pedir "$API/progresiones/$PR1" -H "X-Usuario-Id: $A"; esperar 404
+pedir "$API/progresiones/$PR1/acordes" -H "X-Usuario-Id: $A"; esperar 404
 
 # ------------------------------------------------------------ resumen
 

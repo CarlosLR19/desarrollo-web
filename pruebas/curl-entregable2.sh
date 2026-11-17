@@ -74,15 +74,15 @@ pedir "$API/proyectos"
 
 # ------------------------------------------------------------ secciones, progresiones y acordes
 paso "13. Crear sección Verso (esperado 201)"
-pedir -X POST "$API/proyectos/$ID_PROYECTO/secciones" -H "Content-Type: application/json" \
+pedir -X POST "$API/proyectos/$ID_PROYECTO/secciones" -H "Content-Type: application/json" -H "X-Usuario-Id: $ID_USUARIO" \
   -d '{"nombre":"Verso","orden":1}'
 ID_SECCION=$(extraer idSeccion)
 
 paso "14. Listar secciones del proyecto (esperado 200)"
-pedir "$API/proyectos/$ID_PROYECTO/secciones"
+pedir "$API/proyectos/$ID_PROYECTO/secciones" -H "X-Usuario-Id: $ID_USUARIO"
 
 paso "15. Crear progresión (esperado 201)"
-pedir -X POST "$API/secciones/$ID_SECCION/progresiones" -H "Content-Type: application/json" \
+pedir -X POST "$API/secciones/$ID_SECCION/progresiones" -H "Content-Type: application/json" -H "X-Usuario-Id: $ID_USUARIO" \
   -d '{"nombre":"Progresión principal","orden":1}'
 ID_PROGRESION=$(extraer idProgresion)
 
@@ -90,20 +90,20 @@ paso "16. Agregar acordes C - G - Am - F (esperado 201)"
 ORDEN=1
 for ACORDE in 'C mayor' 'G mayor' 'A menor' 'F mayor'; do
   set -- $ACORDE
-  pedir -X POST "$API/progresiones/$ID_PROGRESION/acordes" -H "Content-Type: application/json" \
+  pedir -X POST "$API/progresiones/$ID_PROGRESION/acordes" -H "Content-Type: application/json" -H "X-Usuario-Id: $ID_USUARIO" \
     -d "{\"fundamental\":\"$1\",\"tipo\":\"$2\",\"inversion\":0,\"duracionPulsos\":4,\"orden\":$ORDEN}"
   ORDEN=$((ORDEN + 1))
 done
 
 paso "17. Acorde con tipo inválido (esperado 400)"
-pedir -X POST "$API/progresiones/$ID_PROGRESION/acordes" -H "Content-Type: application/json" \
+pedir -X POST "$API/progresiones/$ID_PROGRESION/acordes" -H "Content-Type: application/json" -H "X-Usuario-Id: $ID_USUARIO" \
   -d '{"fundamental":"C","tipo":"raro","inversion":0,"duracionPulsos":4,"orden":5}'
 
 paso "18. Consultar la progresión con sus acordes (esperado 200)"
-pedir "$API/progresiones/$ID_PROGRESION"
+pedir "$API/progresiones/$ID_PROGRESION" -H "X-Usuario-Id: $ID_USUARIO"
 
 paso "19. Listar acordes de la progresión (esperado 200)"
-pedir "$API/progresiones/$ID_PROGRESION/acordes"
+pedir "$API/progresiones/$ID_PROGRESION/acordes" -H "X-Usuario-Id: $ID_USUARIO"
 
 # ------------------------------------------------------------ generador musical
 paso "20. Generar acorde Cmaj7 (esperado 200)"

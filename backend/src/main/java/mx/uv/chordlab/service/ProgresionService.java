@@ -27,17 +27,17 @@ public class ProgresionService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProgresionResponse> listar(Integer idSeccion) {
-        seccionService.buscar(idSeccion);
+    public List<ProgresionResponse> listar(Integer idSeccion, Integer idUsuario) {
+        seccionService.buscarDelUsuario(idSeccion, idUsuario);
         return progresiones.findBySeccionIdSeccionOrderByOrdenAsc(idSeccion).stream()
                 .map(p -> ProgresionResponse.de(p, null, null))
                 .toList();
     }
 
     @Transactional
-    public ProgresionResponse crear(Integer idSeccion, ProgresionRequest req) {
+    public ProgresionResponse crear(Integer idSeccion, Integer idUsuario, ProgresionRequest req) {
         Progresion p = new Progresion();
-        p.setSeccion(seccionService.buscar(idSeccion));
+        p.setSeccion(seccionService.buscarDelUsuario(idSeccion, idUsuario));
         p.setNombre(req.nombre().trim());
         p.setOrden(req.orden());
         progresiones.save(p);
@@ -46,9 +46,9 @@ public class ProgresionService {
 
     /** Devuelve la progresión con sus acordes y las notas de cada uno. */
     @Transactional(readOnly = true)
-    public ProgresionResponse obtener(Integer idProgresion) {
-        Progresion p = buscar(idProgresion);
-        return ProgresionResponse.de(p, acordeService.listar(idProgresion, null), null);
+    public ProgresionResponse obtener(Integer idProgresion, Integer idUsuario) {
+        Progresion p = buscarDelUsuario(idProgresion, idUsuario);
+        return ProgresionResponse.de(p, acordeService.listar(idProgresion, idUsuario, null), null);
     }
 
     @Transactional

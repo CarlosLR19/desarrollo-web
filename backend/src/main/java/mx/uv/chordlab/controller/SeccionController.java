@@ -19,14 +19,17 @@ public class SeccionController {
     }
 
     @GetMapping("/proyectos/{idProyecto}/secciones")
-    public List<SeccionResponse> listar(@PathVariable Integer idProyecto) {
-        return service.listar(idProyecto);
+    public List<SeccionResponse> listar(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                        @PathVariable Integer idProyecto) {
+        return service.listar(idProyecto, idUsuario);
     }
 
     @PostMapping("/proyectos/{idProyecto}/secciones")
     @ResponseStatus(HttpStatus.CREATED)
-    public SeccionResponse crear(@PathVariable Integer idProyecto, @Valid @RequestBody SeccionRequest req) {
-        return service.crear(idProyecto, req);
+    public SeccionResponse crear(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                 @PathVariable Integer idProyecto,
+                                 @Valid @RequestBody SeccionRequest req) {
+        return service.crear(idProyecto, idUsuario, req);
     }
 
     @PutMapping("/secciones/{id}")

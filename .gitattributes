@@ -1,0 +1,2 @@
+# Los scripts de bash siempre con finales LF, para que funcionen en WSL
+*.sh text eol=lf

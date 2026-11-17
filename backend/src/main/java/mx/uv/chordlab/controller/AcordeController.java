@@ -20,15 +20,18 @@ public class AcordeController {
 
     /** GET /progresiones/{id}/acordes?tipo=maj7 (el filtro es opcional). */
     @GetMapping("/progresiones/{idProgresion}/acordes")
-    public List<AcordeResponse> listar(@PathVariable Integer idProgresion,
+    public List<AcordeResponse> listar(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                       @PathVariable Integer idProgresion,
                                        @RequestParam(required = false) String tipo) {
-        return service.listar(idProgresion, tipo);
+        return service.listar(idProgresion, idUsuario, tipo);
     }
 
     @PostMapping("/progresiones/{idProgresion}/acordes")
     @ResponseStatus(HttpStatus.CREATED)
-    public AcordeResponse crear(@PathVariable Integer idProgresion, @Valid @RequestBody AcordeRequest req) {
-        return service.crear(idProgresion, req);
+    public AcordeResponse crear(@RequestHeader(Cabeceras.USUARIO) Integer idUsuario,
+                                @PathVariable Integer idProgresion,
+                                @Valid @RequestBody AcordeRequest req) {
+        return service.crear(idProgresion, idUsuario, req);
     }
 
     @PutMapping("/acordes/{id}")

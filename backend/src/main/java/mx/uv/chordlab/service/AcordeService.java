@@ -31,8 +31,8 @@ public class AcordeService {
 
     /** Lista los acordes de una progresión; si se indica "tipo" (ej. maj7) solo devuelve los de ese tipo. */
     @Transactional(readOnly = true)
-    public List<AcordeResponse> listar(Integer idProgresion, String tipo) {
-        buscarProgresion(idProgresion);
+    public List<AcordeResponse> listar(Integer idProgresion, Integer idUsuario, String tipo) {
+        buscarProgresionDelUsuario(idProgresion, idUsuario);
         String filtro = (tipo == null || tipo.isBlank()) ? null : teoria.normalizarTipo(tipo);
         return acordes.findByProgresionIdProgresionOrderByOrdenAsc(idProgresion).stream()
                 .filter(a -> filtro == null || filtro.equals(a.getTipo()))
@@ -42,8 +42,8 @@ public class AcordeService {
 
     /** RF11 / RF14: agrega un acorde a una progresión guardada. Se valida con la lógica musical antes de guardar. */
     @Transactional
-    public AcordeResponse crear(Integer idProgresion, AcordeRequest req) {
-        Progresion progresion = buscarProgresion(idProgresion);
+    public AcordeResponse crear(Integer idProgresion, Integer idUsuario, AcordeRequest req) {
+        Progresion progresion = buscarProgresionDelUsuario(idProgresion, idUsuario);
         Acorde a = new Acorde();
         a.setProgresion(progresion);
         aplicar(a, req);
@@ -87,8 +87,15 @@ public class AcordeService {
                 a.getDuracionPulsos(), a.getOrden(), g.simbolo(), g.notas(), g.notasConOctava(), mensaje);
     }
 
-    private Progresion buscarProgresion(Integer idProgresion) {
-        return progresiones.findById(idProgresion)
+    /**
+     * Busca la progresión (404 si no existe) y comprueba que su proyecto pertenece al usuario (403 si no, RNF05).
+     * Usa ProyectoService y no ProgresionService porque ProgresionService ya depende de esta clase
+     * y la dependencia circular impediría arrancar Spring.
+     */
+    private Progresion buscarProgresionDelUsuario(Integer idProgresion, Integer idUsuario) {
+        Progresion p = progresiones.findById(idProgresion)
                 .orElseThrow(() -> new RecursoNoEncontradoException("No existe la progresión " + idProgresion));
+        proyectoService.buscarDelUsuario(p.getSeccion().getProyecto().getIdProyecto(), idUsuario);
+        return p;
     }
 }

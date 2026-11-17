@@ -22,8 +22,8 @@ public class SeccionService {
     }
 
     @Transactional(readOnly = true)
-    public List<SeccionResponse> listar(Integer idProyecto) {
-        proyectoService.buscar(idProyecto);
+    public List<SeccionResponse> listar(Integer idProyecto, Integer idUsuario) {
+        proyectoService.buscarDelUsuario(idProyecto, idUsuario);
         return secciones.findByProyectoIdProyectoOrderByOrdenAsc(idProyecto).stream()
                 .map(s -> SeccionResponse.de(s, null))
                 .toList();
@@ -31,9 +31,9 @@ public class SeccionService {
 
     /** RF15: organiza el proyecto en secciones (intro, verso, coro, puente...). */
     @Transactional
-    public SeccionResponse crear(Integer idProyecto, SeccionRequest req) {
+    public SeccionResponse crear(Integer idProyecto, Integer idUsuario, SeccionRequest req) {
         Seccion s = new Seccion();
-        s.setProyecto(proyectoService.buscar(idProyecto));
+        s.setProyecto(proyectoService.buscarDelUsuario(idProyecto, idUsuario));
         s.setNombre(req.nombre().trim());
         s.setOrden(req.orden());
         secciones.save(s);
