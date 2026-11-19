@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChordLab | Mis proyectos</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/proyectos.css">
+</head>
+<body>
+
+    <header class="encabezado">
+        <div class="marca">
+            <span class="icono">♫</span>
+            <h1>ChordLab</h1>
+        </div>
+
+        <nav class="navegacion-principal">
+    <button id="btnVistaProyectos" class="boton-nav activo">
+        Mis proyectos
+    </button>
+
+    <button id="btnVistaGenerador" class="boton-nav">
+        Generador musical
+    </button>
+</nav>
+
+        <div class="usuario">
+            <span id="nombreUsuario">Usuario</span>
+            <button id="btnCerrarSesion" class="boton-secundario">
+                Cerrar sesión
+            </button>
+        </div>
+    </header>
+
+    <main class="contenido">
+
+        <section class="titulo-seccion">
+            <div>
+                <h2>Mis proyectos</h2>
+                <p>Organiza tus ideas y continúa creando música.</p>
+            </div>
+
+            <button id="btnNuevoProyecto" class="boton-principal">
+                + Nuevo proyecto
+            </button>
+        </section>
+
+        <section id="formularioProyecto" class="formulario-proyecto oculto">
+    <h3 id="tituloFormulario">Nuevo proyecto</h3>
+
+    <form id="formProyecto">
+
+        <label for="nombreProyecto">Nombre *</label>
+        <input type="text" id="nombreProyecto"
+               maxlength="120" required>
+
+        <label for="descripcionProyecto">Descripción</label>
+        <textarea id="descripcionProyecto"
+                  maxlength="2000" rows="3"></textarea>
+
+        <div class="campos-dobles">
+            <div>
+                <label for="tonalidadProyecto">Tonalidad *</label>
+                <select id="tonalidadProyecto" required></select>
+            </div>
+
+            <div>
+                <label for="escalaProyecto">Escala *</label>
+                <select id="escalaProyecto" required>
+                    <option value="mayor">Mayor</option>
+                    <option value="menor">Menor</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="tempoProyecto">Tempo (BPM) *</label>
+                <input type="number" id="tempoProyecto"
+                       min="20" max="300" required>
+            </div>
+
+            <div>
+                <label for="compasNumProyecto">Numerador *</label>
+                <input type="number" id="compasNumProyecto"
+                       min="1" max="16" required>
+            </div>
+
+            <div>
+                <label for="compasDenProyecto">Denominador *</label>
+                <select id="compasDenProyecto" required>
+                    <option value="2">2</option>
+                    <option value="4" selected>4</option>
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="acciones-formulario">
+            <button type="button" id="btnCancelar"
+                    class="boton-secundario">Cancelar</button>
+
+            <button type="submit" class="boton-principal">
+                Guardar proyecto
+            </button>
+        </div>
+
+    </form>
+</section>
+
+        <section class="herramientas">
+            <input
+                type="search"
+                id="busqueda"
+                placeholder="Buscar proyecto por nombre..."
+            >
+
+            <select id="filtroEscala">
+                <option value="">Todas las escalas</option>
+                <option value="mayor">Mayor</option>
+                <option value="menor">Menor</option>
+            </select>
+        </section>
+
+        <section class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Proyecto</th>
+                        <th>Tonalidad</th>
+                        <th>Escala</th>
+                        <th>Tempo</th>
+                        <th>Compás</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaProyectos">
+                    <tr>
+                        <td colspan="6" class="estado-tabla">
+                            Cargando proyectos...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <p id="mensaje" class="mensaje"></p>
+
+        <!-- Vista de secciones -->
+<section id="vistaSecciones" class="oculto">
+
+    <div class="titulo-seccion">
+        <div>
+            <h2 id="tituloProyectoSecciones">Secciones del proyecto</h2>
+            <p>Organiza la estructura de tu composición.</p>
+        </div>
+
+        <button id="btnVolverProyectos" class="boton-secundario">
+            Volver a proyectos
+        </button>
+    </div>
+
+    <button id="btnNuevaSeccion" class="boton-principal">
+        + Nueva sección
+    </button>
+
+    <form id="formSeccion" class="formulario-proyecto oculto">
+        <h3 id="tituloFormularioSeccion">Nueva sección</h3>
+
+        <label for="nombreSeccion">Nombre *</label>
+        <input type="text" id="nombreSeccion" maxlength="50" required
+               placeholder="Ej. Intro, Verso, Coro">
+
+        <label for="ordenSeccion">Orden *</label>
+        <input type="number" id="ordenSeccion" min="1" required>
+
+        <div class="acciones-formulario">
+            <button type="button" id="btnCancelarSeccion"
+                    class="boton-secundario">Cancelar</button>
+            <button type="submit" class="boton-principal">
+                Guardar sección
+            </button>
+        </div>
+    </form>
+
+    <div class="tabla-contenedor">
+        <table>
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Sección</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaSecciones">
+                <tr>
+                    <td colspan="3" class="estado-tabla">
+                        Selecciona un proyecto.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p id="mensajeSecciones" class="mensaje"></p>
+
+    </section> <!-- Cierra vistaSecciones -->
+
+<!-- Vista del generador musical -->
+<section id="vistaGenerador" class="oculto">
+
+    <div class="titulo-seccion">
+        <div>
+            <h2>Generador musical</h2>
+            <p>Explora acordes y descubre sus notas.</p>
+        </div>
+    </div>
+
+    <div class="formulario-proyecto">
+        <h3>Generar acorde</h3>
+
+        <div class="campos-dobles">
+            <div>
+                <label for="fundamentalAcorde">Nota fundamental</label>
+                <select id="fundamentalAcorde"></select>
+            </div>
+
+            <div>
+                <label for="tipoAcorde">Tipo de acorde</label>
+                <select id="tipoAcorde"></select>
+            </div>
+
+            <div>
+                <label for="inversionAcorde">Inversión</label>
+                <select id="inversionAcorde">
+                    <option value="0">Fundamental</option>
+                    <option value="1">Primera inversión</option>
+                    <option value="2">Segunda inversión</option>
+                    <option value="3">Tercera inversión</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" id="btnGenerarAcorde"
+                class="boton-principal">
+            Generar acorde
+        </button>
+
+        <p id="mensajeGenerador" class="mensaje"></p>
+
+        <div id="resultadoAcorde" class="oculto">
+            <h3 id="nombreAcorde"></h3>
+            <p id="simboloAcorde"></p>
+            <div id="notasAcorde"></div>
+        </div>
+    </div>
+
+</section>
+    <!-- Vista del generador musical -->
+<section id="vistaGenerador" class="oculto">
+
+    <div class="titulo-seccion">
+        <div>
+            <h2>Generador musical</h2>
+            <p>Explora acordes y descubre sus notas.</p>
+        </div>
+    </div>
+
+    <div class="formulario-proyecto">
+        <h3>Generar acorde</h3>
+
+        <div class="campos-dobles">
+            <div>
+                <label for="fundamentalAcorde">Nota fundamental</label>
+                <select id="fundamentalAcorde"></select>
+            </div>
+
+            <div>
+                <label for="tipoAcorde">Tipo de acorde</label>
+                <select id="tipoAcorde"></select>
+            </div>
+
+            <div>
+                <label for="inversionAcorde">Inversión</label>
+                <select id="inversionAcorde">
+                    <option value="0">Fundamental</option>
+                    <option value="1">Primera inversión</option>
+                    <option value="2">Segunda inversión</option>
+                    <option value="3">Tercera inversión</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" id="btnGenerarAcorde"
+                class="boton-principal">
+            Generar acorde
+        </button>
+
+        <p id="mensajeGenerador" class="mensaje"></p>
+
+        <div id="resultadoAcorde" class="oculto">
+            <h3 id="nombreAcorde"></h3>
+            <p id="simboloAcorde"></p>
+            <div id="notasAcorde"></div>
+        </div>
+    </div>
+
+</section>
+
+</section>
+
+    </main>
+
+    <script src="js/api.js"></script>
+<script src="js/proyectos.js"></script>
+<script src="js/secciones.js"></script>
+<script src="js/navegacion.js"></script>
+<script src="js/generador.js"></script>
+</body>
+</html>

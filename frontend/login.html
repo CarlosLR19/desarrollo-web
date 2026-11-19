@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChordLab | Acceso</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <main class="contenedor">
+        <section class="panel">
+
+            <div class="marca">
+                <span class="icono">♫</span>
+                <h1>ChordLab</h1>
+                <p>Tu espacio para crear música</p>
+            </div>
+
+            <div class="tabs">
+                <button id="tabLogin" class="tab activo">Iniciar sesión</button>
+                <button id="tabRegistro" class="tab">Registrarse</button>
+            </div>
+
+            <form id="formLogin">
+                <h2>¡Qué gusto verte!</h2>
+                <p class="descripcion">Ingresa a tu cuenta para continuar.</p>
+
+                <label for="correoLogin">Correo electrónico</label>
+                <input type="email" id="correoLogin" required
+                       placeholder="correo@ejemplo.com">
+
+                <label for="contrasenaLogin">Contraseña</label>
+                <input type="password" id="contrasenaLogin" required
+                       placeholder="Tu contraseña">
+
+                <button type="submit" class="boton-principal">
+                    Iniciar sesión
+                </button>
+            </form>
+
+            <form id="formRegistro" class="oculto">
+                <h2>Crea tu cuenta</h2>
+                <p class="descripcion">Comienza a crear tus propias canciones.</p>
+
+                <label for="nombreRegistro">Nombre</label>
+                <input type="text" id="nombreRegistro" required
+                       maxlength="100" placeholder="Tu nombre">
+
+                <label for="correoRegistro">Correo electrónico</label>
+                <input type="email" id="correoRegistro" required
+                       maxlength="150" placeholder="correo@ejemplo.com">
+
+                <label for="contrasenaRegistro">Contraseña</label>
+                <input type="password" id="contrasenaRegistro" required
+                       minlength="8" maxlength="72"
+                       placeholder="Mínimo 8 caracteres">
+
+                <button type="submit" class="boton-principal">
+                    Crear cuenta
+                </button>
+            </form>
+
+            <p id="mensaje" class="mensaje"></p>
+
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

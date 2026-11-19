@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<!-- 17: es el JDK instalado en la WSL de todos; Spring Boot 4 lo soporta -->
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

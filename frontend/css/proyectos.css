@@ -1,0 +1,277 @@
+
+.encabezado {
+    background: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.marca, .usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.marca h1 {
+    font-size: 23px;
+}
+
+.icono {
+    font-size: 30px;
+    color: #0f766e;
+}
+
+.usuario {
+    color: #475569;
+    font-size: 14px;
+}
+
+.boton-secundario {
+    padding: 9px 14px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #334155;
+}
+
+.contenido {
+    max-width: 1150px;
+    margin: 45px auto;
+    padding: 0 20px;
+}
+
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.titulo-seccion h2 {
+    font-size: 26px;
+}
+
+.titulo-seccion p {
+    color: #64748b;
+    margin-top: 7px;
+}
+
+.boton-principal {
+    padding: 12px 18px;
+    background: #0f766e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.boton-principal:hover {
+    background: #115e59;
+}
+
+.herramientas {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.herramientas input,
+.herramientas select {
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+}
+
+.herramientas input {
+    flex: 1;
+}
+
+.tabla-contenedor {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
+}
+
+td {
+    font-size: 14px;
+}
+
+.estado-tabla {
+    text-align: center;
+    color: #64748b;
+    padding: 30px;
+}
+
+.mensaje {
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+@media (max-width: 650px) {
+    .titulo-seccion {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .herramientas {
+        flex-direction: column;
+    }
+
+    .encabezado {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+}
+
+
+.formulario-proyecto {
+    background: white;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    margin-bottom: 25px;
+}
+
+.formulario-proyecto h3 {
+    margin-bottom: 18px;
+}
+
+.formulario-proyecto label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 14px 0 7px;
+}
+
+.formulario-proyecto input,
+.formulario-proyecto select,
+.formulario-proyecto textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+}
+
+.formulario-proyecto textarea {
+    resize: vertical;
+}
+
+.campos-dobles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.acciones-formulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.oculto {
+    display: none;
+}
+
+@media (max-width: 550px) {
+    .campos-dobles {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Botón para eliminar proyectos */
+.boton-eliminar {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.boton-eliminar:hover {
+    background-color: #b02a37;
+}
+
+
+.navegacion-principal {
+    display: flex;
+    gap: 10px;
+}
+
+.boton-nav {
+    padding: 9px 14px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #475569;
+    cursor: pointer;
+}
+
+.boton-nav.activo {
+    background: #0f766e;
+    color: white;
+}
+
+@media (max-width: 650px) {
+    .navegacion-principal {
+        order: 3;
+        width: 100%;
+    }
+}
+
+
+#resultadoAcorde {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+#notasAcorde {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.nota-acorde {
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: #0f766e;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+

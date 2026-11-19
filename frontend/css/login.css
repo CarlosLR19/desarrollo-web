@@ -1,0 +1,127 @@
+
+.contenedor {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.panel {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.marca {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.icono {
+    font-size: 35px;
+    color: #0f766e;
+}
+
+.marca h1 {
+    margin-top: 5px;
+    font-size: 28px;
+}
+
+.marca p, .descripcion {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 7px;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 25px;
+}
+
+.tab {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.tab.activo {
+    color: #0f766e;
+    border-bottom: 2px solid #0f766e;
+    font-weight: bold;
+}
+
+form h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.descripcion {
+    margin-bottom: 22px;
+}
+
+form label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 15px 0 7px;
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+}
+
+form input:focus {
+    border-color: #0f766e;
+}
+
+.boton-principal {
+    width: 100%;
+    margin-top: 24px;
+    padding: 13px;
+    background: #0f766e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.boton-principal:hover {
+    background: #115e59;
+}
+
+.oculto {
+    display: none;
+}
+
+.mensaje {
+    margin-top: 18px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.mensaje.error {
+    color: #dc2626;
+}
+
+.mensaje.exito {
+    color: #15803d;
+}
+
+@media (max-width: 480px) {
+    .panel {
+        padding: 25px 20px;
+    }
+}
