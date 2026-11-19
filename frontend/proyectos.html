@@ -208,6 +208,7 @@
 
     </section> <!-- Cierra vistaSecciones -->
 
+
 <!-- Vista del generador musical -->
 <section id="vistaGenerador" class="oculto">
 
@@ -218,10 +219,13 @@
         </div>
     </div>
 
+    <!-- Generador de acordes -->
     <div class="formulario-proyecto">
+
         <h3>Generar acorde</h3>
 
         <div class="campos-dobles">
+
             <div>
                 <label for="fundamentalAcorde">Nota fundamental</label>
                 <select id="fundamentalAcorde"></select>
@@ -241,6 +245,7 @@
                     <option value="3">Tercera inversión</option>
                 </select>
             </div>
+
         </div>
 
         <button type="button" id="btnGenerarAcorde"
@@ -254,62 +259,72 @@
             <h3 id="nombreAcorde"></h3>
             <p id="simboloAcorde"></p>
             <div id="notasAcorde"></div>
+
+            <h3>Teclado virtual</h3>
+            <div id="tecladoPiano" class="teclado-piano"></div>
         </div>
+
     </div>
 
-</section>
-    <!-- Vista del generador musical -->
-<section id="vistaGenerador" class="oculto">
+    <!-- Generador de progresiones -->
+    <div class="formulario-proyecto formulario-progresion">
 
-    <div class="titulo-seccion">
-        <div>
-            <h2>Generador musical</h2>
-            <p>Explora acordes y descubre sus notas.</p>
-        </div>
-    </div>
-
-    <div class="formulario-proyecto">
-        <h3>Generar acorde</h3>
+        <h3>Generar progresión armónica</h3>
+        <p>Descubre combinaciones de acordes según tu tonalidad y estilo.</p>
 
         <div class="campos-dobles">
+
             <div>
-                <label for="fundamentalAcorde">Nota fundamental</label>
-                <select id="fundamentalAcorde"></select>
+                <label for="tonalidadProgresion">Tonalidad</label>
+                <select id="tonalidadProgresion"></select>
             </div>
 
             <div>
-                <label for="tipoAcorde">Tipo de acorde</label>
-                <select id="tipoAcorde"></select>
+                <label for="escalaProgresion">Escala</label>
+                <select id="escalaProgresion"></select>
             </div>
 
             <div>
-                <label for="inversionAcorde">Inversión</label>
-                <select id="inversionAcorde">
-                    <option value="0">Fundamental</option>
-                    <option value="1">Primera inversión</option>
-                    <option value="2">Segunda inversión</option>
-                    <option value="3">Tercera inversión</option>
-                </select>
+                <label for="estiloProgresion">Estilo musical</label>
+                <select id="estiloProgresion"></select>
             </div>
+
+            <div>
+                <label for="cantidadProgresion">Cantidad de acordes</label>
+                <input type="number" id="cantidadProgresion"
+                       min="2" max="16" value="4">
+            </div>
+
         </div>
 
-        <button type="button" id="btnGenerarAcorde"
+        <button type="button" id="btnGenerarProgresion"
                 class="boton-principal">
-            Generar acorde
+            Generar progresión
         </button>
 
-        <p id="mensajeGenerador" class="mensaje"></p>
+        <p id="mensajeProgresion" class="mensaje"></p>
 
-        <div id="resultadoAcorde" class="oculto">
-            <h3 id="nombreAcorde"></h3>
-            <p id="simboloAcorde"></p>
-            <div id="notasAcorde"></div>
+        <div id="resultadoProgresion" class="oculto">
+
+            <h3>Tu progresión</h3>
+            <p id="resumenProgresion"></p>
+
+            <div id="listaProgresion" class="lista-progresion"></div>
+
         </div>
+
     </div>
 
 </section>
+</main>
 
-</section>
+<script src="js/api.js"></script>
+<script src="js/proyectos.js"></script>
+<script src="js/secciones.js"></script>
+<script src="js/navegacion.js"></script>
+<script src="js/generador.js"></script>
+</body>
+</html>
 
     </main>
 

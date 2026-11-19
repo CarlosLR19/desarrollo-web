@@ -274,4 +274,95 @@ td {
     font-size: 18px;
 }
 
+/*teclado*/
+
+.teclado-piano {
+    display: flex;
+    position: relative;
+    height: 160px;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.tecla-blanca {
+    position: relative;
+    min-width: 45px;
+    height: 150px;
+    background: white;
+    border: 1px solid #334155;
+    border-radius: 0 0 5px 5px;
+    cursor: default;
+}
+
+.tecla-negra {
+    position: relative;
+    min-width: 28px;
+    height: 95px;
+    margin-left: -14px;
+    margin-right: -14px;
+    z-index: 2;
+    background: #172554;
+    border: 1px solid #020617;
+    border-radius: 0 0 4px 4px;
+    cursor: default;
+}
+
+.tecla-blanca.activa {
+    background: #5eead4;
+}
+
+.tecla-negra.activa {
+    background: #0f766e;
+}
+
+.tecla-blanca,
+.tecla-negra {
+    flex-shrink: 0;
+}
+
+
+
+.formulario-progresion {
+    margin-top: 25px;
+}
+
+.lista-progresion {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.tarjeta-acorde {
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.grado-acorde {
+    display: inline-block;
+    color: #0f766e;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tarjeta-acorde h3 {
+    margin: 12px 0;
+    font-size: 28px;
+    color: #172554;
+}
+
+.tarjeta-acorde p {
+    margin: 6px 0;
+    color: #64748b;
+}
+
+.tarjeta-acorde .notas-progresion {
+    margin-top: 12px;
+    color: #0f766e;
+    font-weight: bold;
+}
 
