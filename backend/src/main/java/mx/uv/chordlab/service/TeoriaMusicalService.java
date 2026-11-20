@@ -280,7 +280,8 @@ public class TeoriaMusicalService {
             String tipo = tipoParaGrado(g, mayor, est);
             Nota raiz = tonica.mas(grados.get(g));
             AcordeGenerado a = generarAcorde(raiz.texto(), tipo, 0);
-            acordes.add(new AcordeProgresion(a.simbolo(), numeroRomano(g, tipo), a.fundamental(), a.tipo(), a.notas()));
+            acordes.add(new AcordeProgresion(a.simbolo(), numeroRomano(g, tipo), a.fundamental(), a.tipo(), a.notas(),
+                    a.notasConOctava()));
         }
         return new ProgresionGenerada(tonica.texto(), esc, est, acordes);
     }

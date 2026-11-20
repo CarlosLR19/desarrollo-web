@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChordLab | Proyecto compartido</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/proyectos.css">
+    <link rel="stylesheet" href="css/generador.css">
+    <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+
+    <header class="encabezado">
+        <div class="marca">
+            <span class="icono">♫</span>
+            <h1>ChordLab</h1>
+        </div>
+
+        <nav class="navegacion-principal">
+            <a id="enlaceVolver" href="login.html" class="boton-nav">Iniciar sesión</a>
+        </nav>
+    </header>
+
+    <main class="contenido">
+
+        <!-- Acceso con enlace o código (RF17) -->
+        <section id="vistaAcceso" class="vista">
+            <div class="titulo-seccion">
+                <div>
+                    <h2>Proyectos compartidos contigo</h2>
+                    <p>Pega el enlace o el código que te compartieron para abrir el proyecto.</p>
+                </div>
+            </div>
+
+            <form id="formAcceso" class="formulario-proyecto">
+                <label for="textoAcceso">Enlace o código *</label>
+                <div class="fila-enlace">
+                    <input type="text" id="textoAcceso" required
+                           placeholder="https://.../compartido.html?token=... o el código">
+                    <button type="submit" class="boton-principal">Abrir proyecto</button>
+                </div>
+            </form>
+
+            <div id="bloqueRecientes" class="panel oculto">
+                <h3>Abiertos recientemente</h3>
+                <div class="tabla-contenedor">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Proyecto</th>
+                                <th>Propietario</th>
+                                <th>Permiso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaRecientes"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p id="mensajeAcceso" class="mensaje"></p>
+        </section>
+
+        <!-- Proyecto compartido -->
+        <section id="vistaCompartido" class="vista oculto">
+
+            <div class="titulo-seccion">
+                <div>
+                    <h2 id="nombreCompartido">Proyecto</h2>
+                    <p id="propietarioCompartido"></p>
+                </div>
+
+                <div class="acciones-titulo">
+                    <span id="permisoCompartido" class="etiqueta"></span>
+                    <button id="btnOtroEnlace" class="boton-secundario">Abrir otro enlace</button>
+                </div>
+            </div>
+
+            <!-- Datos generales -->
+            <div class="panel">
+                <div class="encabezado-panel">
+                    <h3>Datos del proyecto</h3>
+                    <button id="btnEditarCompartido" class="boton-principal oculto">
+                        Editar datos
+                    </button>
+                </div>
+
+                <p id="descripcionCompartido" class="texto-suave"></p>
+
+                <div class="datos-proyecto">
+                    <div><span>Tonalidad</span><strong id="tonalidadCompartido"></strong></div>
+                    <div><span>Escala</span><strong id="escalaCompartido"></strong></div>
+                    <div><span>Tempo</span><strong id="tempoCompartido"></strong></div>
+                    <div><span>Compás</span><strong id="compasCompartido"></strong></div>
+                </div>
+
+                <!-- Solo con permiso de edición -->
+                <form id="formEditarCompartido" class="formulario-proyecto oculto">
+                    <h3>Editar datos del proyecto</h3>
+
+                    <label for="nombreEditCompartido">Nombre *</label>
+                    <input type="text" id="nombreEditCompartido" maxlength="120" required>
+
+                    <label for="descripcionEditCompartido">Descripción</label>
+                    <textarea id="descripcionEditCompartido" maxlength="2000" rows="3"></textarea>
+
+                    <div class="campos-dobles">
+                        <div>
+                            <label for="tonalidadEditCompartido">Tonalidad *</label>
+                            <select id="tonalidadEditCompartido" required></select>
+                        </div>
+                        <div>
+                            <label for="escalaEditCompartido">Escala *</label>
+                            <select id="escalaEditCompartido" required>
+                                <option value="mayor">Mayor</option>
+                                <option value="menor">Menor</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="tempoEditCompartido">Tempo (BPM) *</label>
+                            <input type="number" id="tempoEditCompartido" min="20" max="300" required>
+                        </div>
+                        <div>
+                            <label for="compasNumEditCompartido">Numerador *</label>
+                            <input type="number" id="compasNumEditCompartido" min="1" max="16" required>
+                        </div>
+                        <div>
+                            <label for="compasDenEditCompartido">Denominador *</label>
+                            <select id="compasDenEditCompartido" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="acciones-formulario">
+                        <button type="button" id="btnCancelarEditCompartido" class="boton-secundario">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="boton-principal">Guardar cambios</button>
+                    </div>
+                </form>
+
+                <p id="mensajeCompartido" class="mensaje"></p>
+            </div>
+
+            <!-- Estructura: secciones, progresiones y acordes -->
+            <div class="panel">
+                <h3>Estructura de la composición</h3>
+                <div id="estructuraCompartido"></div>
+            </div>
+
+            <!-- Reproductor y visualización -->
+            <div id="panelReproduccion" class="panel oculto">
+                <h3 id="tituloReproduccion">Progresión</h3>
+                <div id="reproductorCompartido"></div>
+
+                <div class="visualizacion">
+                    <div>
+                        <h4 id="tituloVisualizacionCompartido">Selecciona un acorde</h4>
+                        <div id="tecladoCompartido" class="teclado-piano"></div>
+                    </div>
+                    <div>
+                        <h4>Guitarra</h4>
+                        <div id="guitarraCompartido" class="guitarra"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/teclado.js"></script>
+    <script src="js/guitarra.js"></script>
+    <script src="js/reproductor.js"></script>
+    <script src="js/compartido.js"></script>
+</body>
+</html>

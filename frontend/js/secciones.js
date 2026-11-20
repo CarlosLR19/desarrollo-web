@@ -2,7 +2,6 @@
 (() => {
 
     // Elementos de la interfaz
-    const vistaSecciones = document.getElementById("vistaSecciones");
     const tablaSecciones = document.getElementById("tablaSecciones");
     const tituloProyectoSecciones = document.getElementById("tituloProyectoSecciones");
     const mensajeSecciones = document.getElementById("mensajeSecciones");
@@ -34,13 +33,8 @@
             proyectoActual = idProyecto;
             tituloProyectoSecciones.textContent = proyecto.nombre;
 
-            document.querySelectorAll(
-                ".contenido > section:not(#vistaSecciones), .contenido > #mensaje"
-            ).forEach(elemento => {
-                elemento.classList.add("oculto");
-            });
-
-            vistaSecciones.classList.remove("oculto");
+            cerrarFormularioSeccion();
+            window.mostrarVistaChordLab("vistaSecciones");
 
             await cargarSecciones();
 
@@ -141,6 +135,18 @@
             });
 
             celdaAcciones.appendChild(btnEliminar);
+
+            // Botón Progresiones: abre el editor de progresiones de esta sección
+            const btnProgresiones = document.createElement("button");
+            btnProgresiones.type = "button";
+            btnProgresiones.textContent = "Progresiones";
+            btnProgresiones.className = "boton-secundario";
+
+            btnProgresiones.addEventListener("click", () => {
+                window.abrirEditorChordLab(proyectoActual, tituloProyectoSecciones.textContent, seccion);
+            });
+
+            celdaAcciones.appendChild(btnProgresiones);
 
             fila.appendChild(celdaAcciones);
             tablaSecciones.appendChild(fila);
@@ -254,15 +260,9 @@
 
     // Regresar a proyectos
     function volverProyectos() {
-        vistaSecciones.classList.add("oculto");
-
         document.getElementById("formularioProyecto").classList.add("oculto");
+        window.mostrarVistaChordLab("vistaProyectos");
 
-        document.querySelector(".titulo-seccion").classList.remove("oculto");
-        document.querySelector(".herramientas").classList.remove("oculto");
-        document.querySelector(".tabla-contenedor").classList.remove("oculto");
-
-        document.getElementById("mensaje").classList.remove("oculto");
         proyectoActual = null;
         seccionesActuales = [];
     }

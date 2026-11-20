@@ -234,8 +234,9 @@
     font-size: 16px;
 }
 
-/* Teclado: el JS crea las teclas como elementos hermanos */
-#tecladoPiano {
+/* Teclado: teclado.js crea las teclas como elementos hermanos.
+   Se usa la clase .teclado-piano para que sirva en el generador, el editor y los compartidos. */
+.teclado-piano {
     position: relative;
     display: flex;
     width: 100%;
@@ -250,7 +251,7 @@
     box-shadow: 0 7px 15px rgba(15, 23, 42, .10);
 }
 
-#tecladoPiano .tecla-blanca {
+.teclado-piano .tecla-blanca {
     position: relative;
     flex: 1 1 0;
     min-width: 0;
@@ -262,17 +263,19 @@
     z-index: 1;
 }
 
-#tecladoPiano .tecla-blanca.activa {
+.teclado-piano .tecla-blanca.activa {
     background: linear-gradient(180deg, #b9f3e6 0%, #5eead4 100%);
     border-color: #0f9b8e;
     box-shadow: inset 0 -5px 0 rgba(15, 118, 110, .13);
 }
 
-#tecladoPiano .tecla-negra {
+.teclado-piano .tecla-negra {
     position: absolute;
     top: 0;
     z-index: 2;
     width: 4.3%;
+    min-width: 0;
+    margin: 0;
     height: 62%;
     border: 1px solid #111827;
     border-radius: 0 0 5px 5px;
@@ -280,19 +283,19 @@
     box-shadow: 0 4px 5px rgba(15, 23, 42, .28);
 }
 
-/* Posición de las teclas negras en las dos octavas creadas por generador.js */
-#tecladoPiano .tecla-negra:nth-child(2)  { left: 1.4%; }
-#tecladoPiano .tecla-negra:nth-child(4)  { left: 8.6%; }
-#tecladoPiano .tecla-negra:nth-child(7)  { left: 22.9%; }
-#tecladoPiano .tecla-negra:nth-child(9)  { left: 30.0%; }
-#tecladoPiano .tecla-negra:nth-child(11) { left: 37.1%; }
-#tecladoPiano .tecla-negra:nth-child(14) { left: 51.4%; }
-#tecladoPiano .tecla-negra:nth-child(16) { left: 58.6%; }
-#tecladoPiano .tecla-negra:nth-child(19) { left: 72.9%; }
-#tecladoPiano .tecla-negra:nth-child(21) { left: 80.0%; }
-#tecladoPiano .tecla-negra:nth-child(23) { left: 87.1%; }
+/* Posición de las teclas negras en las dos octavas creadas por teclado.js */
+.teclado-piano .tecla-negra:nth-child(2)  { left: 1.4%; }
+.teclado-piano .tecla-negra:nth-child(4)  { left: 8.6%; }
+.teclado-piano .tecla-negra:nth-child(7)  { left: 22.9%; }
+.teclado-piano .tecla-negra:nth-child(9)  { left: 30.0%; }
+.teclado-piano .tecla-negra:nth-child(11) { left: 37.1%; }
+.teclado-piano .tecla-negra:nth-child(14) { left: 51.4%; }
+.teclado-piano .tecla-negra:nth-child(16) { left: 58.6%; }
+.teclado-piano .tecla-negra:nth-child(19) { left: 72.9%; }
+.teclado-piano .tecla-negra:nth-child(21) { left: 80.0%; }
+.teclado-piano .tecla-negra:nth-child(23) { left: 87.1%; }
 
-#tecladoPiano .tecla-negra.activa {
+.teclado-piano .tecla-negra.activa {
     background: linear-gradient(180deg, #a78bfa, #6d28d9);
     border-color: #5b21b6;
     box-shadow: 0 4px 8px rgba(109, 40, 217, .28);
@@ -386,11 +389,11 @@
         padding: 18px 14px;
     }
 
-    #tecladoPiano {
+    .teclado-piano {
         height: 125px;
     }
 
-    #tecladoPiano .tecla-negra {
+    .teclado-piano .tecla-negra {
         width: 4.5%;
         height: 58%;
     }

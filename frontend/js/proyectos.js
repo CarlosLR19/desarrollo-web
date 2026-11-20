@@ -258,6 +258,18 @@ btnSecciones.addEventListener("click", () => {
 
 celdaAcciones.appendChild(btnSecciones);
 
+// Botón Compartir (RF16)
+const btnCompartir = document.createElement("button");
+btnCompartir.type = "button";
+btnCompartir.textContent = "Compartir";
+btnCompartir.className = "boton-secundario";
+
+btnCompartir.addEventListener("click", () => {
+    window.abrirCompartirChordLab(proyecto);
+});
+
+celdaAcciones.appendChild(btnCompartir);
+
 fila.appendChild(celdaAcciones);
 
         tablaProyectos.appendChild(fila);
@@ -330,6 +342,9 @@ btnCerrarSesion.addEventListener("click", () => {
 btnNuevoProyecto.addEventListener("click", abrirFormulario);
 btnCancelar.addEventListener("click", cerrarFormulario);
 formProyecto.addEventListener("submit", guardarProyecto);
+
+// Permitir que otras vistas actualicen la tabla (por ejemplo, el perfil o el generador)
+window.recargarProyectosChordLab = cargarProyectos;
 
 // Cargar información inicial
 cargarCatalogo();

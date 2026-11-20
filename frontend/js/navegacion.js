@@ -1,38 +1,45 @@
+// ==========================================
+// NAVEGACIÓN ENTRE VISTAS
+// Cada pantalla es un <section class="vista">. Solo una se muestra a la vez.
+// Los demás archivos cambian de pantalla con window.mostrarVistaChordLab("idVista").
+// ==========================================
 
-const btnVistaProyectos = document.getElementById("btnVistaProyectos");
-const btnVistaGenerador = document.getElementById("btnVistaGenerador");
+(() => {
 
-function mostrarVistaProyectos() {
-    document.querySelector(".contenido > .titulo-seccion")
-        .classList.remove("oculto");
+    const btnVistaProyectos = document.getElementById("btnVistaProyectos");
+    const btnVistaGenerador = document.getElementById("btnVistaGenerador");
+    const btnVistaPerfil = document.getElementById("btnVistaPerfil");
 
-    document.getElementById("formularioProyecto").classList.add("oculto");
-    document.querySelector(".herramientas").classList.remove("oculto");
-    document.querySelector(".tabla-contenedor").classList.remove("oculto");
-    document.getElementById("mensaje").classList.remove("oculto");
+    // Botón del menú que queda marcado en cada vista
+    const BOTON_DE_VISTA = {
+        vistaProyectos: btnVistaProyectos,
+        vistaSecciones: btnVistaProyectos,
+        vistaEditor: btnVistaProyectos,
+        vistaCompartir: btnVistaProyectos,
+        vistaGenerador: btnVistaGenerador,
+        vistaPerfil: btnVistaPerfil
+    };
 
-    document.getElementById("vistaGenerador").classList.add("oculto");
-    document.getElementById("vistaSecciones").classList.add("oculto");
+    function mostrarVista(idVista) {
 
-    btnVistaProyectos.classList.add("activo");
-    btnVistaGenerador.classList.remove("activo");
-}
+        document.querySelectorAll(".contenido > .vista").forEach(vista => {
+            vista.classList.toggle("oculto", vista.id !== idVista);
+        });
 
-function mostrarVistaGenerador() {
-    document.querySelector(".contenido > .titulo-seccion")
-        .classList.add("oculto");
+        document.querySelectorAll(".navegacion-principal .boton-nav").forEach(boton => {
+            boton.classList.toggle("activo", boton === BOTON_DE_VISTA[idVista]);
+        });
 
-    document.getElementById("formularioProyecto").classList.add("oculto");
-    document.querySelector(".herramientas").classList.add("oculto");
-    document.querySelector(".tabla-contenedor").classList.add("oculto");
-    document.getElementById("mensaje").classList.add("oculto");
+        // Avisar a los módulos que cambió la vista (por ejemplo, para detener la reproducción)
+        document.dispatchEvent(new CustomEvent("chordlab:vista", { detail: idVista }));
 
-    document.getElementById("vistaSecciones").classList.add("oculto");
-    document.getElementById("vistaGenerador").classList.remove("oculto");
+        window.scrollTo({ top: 0 });
+    }
 
-    btnVistaProyectos.classList.remove("activo");
-    btnVistaGenerador.classList.add("activo");
-}
+    btnVistaProyectos.addEventListener("click", () => mostrarVista("vistaProyectos"));
+    btnVistaGenerador.addEventListener("click", () => mostrarVista("vistaGenerador"));
+    btnVistaPerfil.addEventListener("click", () => mostrarVista("vistaPerfil"));
 
-btnVistaProyectos.addEventListener("click", mostrarVistaProyectos);
-btnVistaGenerador.addEventListener("click", mostrarVistaGenerador);
+    window.mostrarVistaChordLab = mostrarVista;
+
+})();
