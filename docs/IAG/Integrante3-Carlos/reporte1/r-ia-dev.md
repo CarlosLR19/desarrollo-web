@@ -21,7 +21,6 @@ Apoyo mediante inteligencia artificial generativa para estructurar y redactar el
 | **Respuesta de IA** | [Respuesta 1 – Guía paso a paso del esquema SQL](#respuesta-1-guia-paso-a-paso-del-esquema-sql) / [Respuesta 2 – Criterios para relaciones y restricciones](#respuesta-2-criterios-para-relaciones-y-restricciones) |
 | **Código anterior** | Commit ([No aplica]) |
 | **Código posterior** | Commit ([No aplcia]) |
-| **Diferencias entre versiones** | `git diff --numstat [hash_anterior] [hash_posterior]` — *(pegar aquí la salida de consola)* |
 | **Prueba de funcionamiento** | Ejecución de `database/esquema.sql` en MySQL verificando la creación de la base de datos y las tablas sin errores de sintaxis; captura/salida de consola adjunta en evidencia |
 | **Código de uso** | Generación / Diseño / Modificación / Revisión |
 | **Reflexión del estudiante** | Utilizar la IA como guía paso a paso me ayudó a entender cómo llevar un modelo entidad-asociación a un script SQL real sin saltarme dependencias, definiendo primero las entidades base y luego las tablas hijas y de relación. Aprendí a estructurar una base de datos de mejor manera, revisando tipos de datos, llaves primarias y foráneas, y comportamientos ante borrado o actualización—para luego verificar y ajustar el script directamente en MySQL y controlarlo con Git. |

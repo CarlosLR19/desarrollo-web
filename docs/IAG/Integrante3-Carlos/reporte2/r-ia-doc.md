@@ -1,9 +1,7 @@
 # Reporte de Uso Documental en el Proyecto
 
 **Fecha:** 16/11/2026  
-**Número de reporte:** 01  
-**Integrante:** Carlos Vicente López Rosales  
-**Entregable:** 3 – Persistencia (reporte de actividades R3)
+**Número de reporte:** 02  
 
 ---
 
@@ -21,7 +19,6 @@ Las consultas tuvieron como objetivo configurar el entorno de desarrollo en WSL 
 | 16/11/2026 | Gemini (Google) | [Prompt 2](#prompt-2) | [Respuesta 2](#respuesta-2) |
 | 16/11/2026 | Gemini (Google) | [Prompt 3](#prompt-3) | [Respuesta 3](#respuesta-3) |
 
-> El prompt y la respuesta se copian como subsecciones y se enlazan desde la tabla.
 
 ## Consulta 1. Configuración de MySQL y servicio en WSL
 
@@ -82,6 +79,4 @@ Gemini aclaró que una API REST en Spring Boot sin frontend acoplado no renderiz
 
 El uso de Gemini permitió resolver rápidamente los problemas de configuración del entorno en WSL, la administración de usuarios y permisos en MySQL 8, y el manejo de variables de entorno en Spring Boot. Asimismo, facilitó la estructuración de pruebas con CURL para verificar tanto los códigos de respuesta HTTP como la persistencia de datos en la base de datos relacional. Todas las soluciones propuestas fueron ejecutadas, verificadas paso a paso en la terminal y contrastadas contra la especificación de `docs/04-api.md`.
 
-Evidencias de las pruebas: [persistencia en MySQL](../../evidencias/entregable3/E3_Carlos_Persistencia_MySQL.png) y [POST y DELETE con CURL](../../evidencias/entregable3/curlPostAndDelete.png).
 
-**Herramienta registrada:** Gemini (Google).
