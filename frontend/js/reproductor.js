@@ -105,6 +105,18 @@
         Object.values(instrumentos).forEach(instrumento => instrumento.releaseAll());
     }
 
+        function crearCampo(etiqueta, control) {
+        const campo = document.createElement("label");
+        campo.className = "reproductor-campo";
+
+        const texto = document.createElement("span");
+        texto.textContent = etiqueta;
+
+        campo.append(texto, control);
+        return campo;
+    }
+
+
     // contenedor: div donde se dibuja la barra
     // opciones.obtenerSecuencia(): [{ etiqueta: "Am", notasConOctava: [...], pulsos: 4 }]
     // opciones.tempo: BPM inicial
@@ -245,7 +257,7 @@
             temporizador = setTimeout(() => tocar(indice + 1), segundos * 1000);
         }
 
-        function reproducir() {
+        async function reproducir() {
             secuencia = opciones.obtenerSecuencia() ?? [];
 
             if (secuencia.length === 0) {
@@ -270,10 +282,6 @@
         }
 
         function detener(texto = "Detenido") {
-            clearTimeout(temporizador);
-            temporizador = null;
-
-            function detener(texto = "Detenido") {
             clearTimeout(temporizador);
             temporizador = null;
             silenciar();
