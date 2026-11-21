@@ -36,24 +36,73 @@
         }
     }
 
+        // ==========================================
+    // SONIDO CON TONE.JS
+    // Cada instrumento es un PolySynth (varias notas a la vez)
+    // con distinto oscilador y envolvente. Se crean una sola vez.
     // ==========================================
-    // PUNTO DE CONEXIÓN CON TONE.JS
-    // Aquí se agregará el sonido. Recibe las notas ("C4", "E4"...),
-    // la duración en segundos y la configuración (instrumento, volumen).
-    // ==========================================
-    function sonarAcorde(notasConOctava, segundos, configuracion) {
-        // Pendiente: Tone.js
+
+    const instrumentos = {};
+
+    function crearInstrumento(nombre) {
+        if (nombre === "guitarra") {
+            // Ataque rápido y caída corta: suena "pulsado"
+            return new Tone.PolySynth(Tone.FMSynth, {
+                harmonicity: 2,
+                modulationIndex: 3,
+                envelope: { attack: 0.002, decay: 0.5, sustain: 0.1, release: 0.8 }
+            }).toDestination();
+        }
+
+        if (nombre === "sintetizador") {
+            // Onda de sierra con entrada suave
+            return new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "sawtooth" },
+                envelope: { attack: 0.05, decay: 0.2, sustain: 0.6, release: 0.6 }
+            }).toDestination();
+        }
+
+        // Piano (por defecto): onda triangular que se apaga poco a poco
+        return new Tone.PolySynth(Tone.Synth, {
+            oscillator: { type: "triangle" },
+            envelope: { attack: 0.005, decay: 0.8, sustain: 0.25, release: 1.2 }
+        }).toDestination();
     }
 
-    function crearCampo(etiqueta, control) {
-        const campo = document.createElement("label");
-        campo.className = "reproductor-campo";
+    function obtenerInstrumento(nombre) {
+        if (!instrumentos[nombre]) {
+            instrumentos[nombre] = crearInstrumento(nombre);
+        }
+        return instrumentos[nombre];
+    }
 
-        const texto = document.createElement("span");
-        texto.textContent = etiqueta;
+    // Recibe las notas ("C4", "E4"...), la duración en segundos y la configuración
+    function sonarAcorde(notasConOctava, segundos, configuracion) {
+        if (!window.Tone || notasConOctava.length === 0) {
+            return;
+        }
 
-        campo.append(texto, control);
-        return campo;
+        const instrumento = obtenerInstrumento(configuracion.instrumento);
+
+        // Volumen: 0–100 % se convierte a decibeles (100 % = 0 dB)
+        instrumento.volume.value = Tone.gainToDb(configuracion.volumen / 100);
+
+        // Se suelta un poco antes del siguiente acorde para que no se encimen
+        const duracion = Math.max(0.1, segundos * 0.95);
+
+        if (configuracion.instrumento === "guitarra") {
+            // Rasgueo: cada cuerda entra 30 ms después de la anterior
+            notasConOctava.forEach((nota, i) => {
+                instrumento.triggerAttackRelease(nota, duracion, Tone.now() + i * 0.03);
+            });
+        } else {
+            instrumento.triggerAttackRelease(notasConOctava, duracion);
+        }
+    }
+
+    // Corta las notas que sigan sonando
+    function silenciar() {
+        Object.values(instrumentos).forEach(instrumento => instrumento.releaseAll());
     }
 
     // contenedor: div donde se dibuja la barra
@@ -207,13 +256,27 @@
             detener();
             btnReproducir.disabled = true;
             btnDetener.disabled = false;
-            contenedor.classList.add("reproduciendo");
+                        contenedor.classList.add("reproduciendo");
+
+            // El navegador solo deja sonar audio después de un clic del usuario:
+            // Tone.start() activa el audio y se llama dentro del clic de "Reproducir"
+            if (window.Tone) {
+                await Tone.start();
+            } else {
+                estado.textContent = "No se pudo cargar Tone.js: se reproduce sin sonido.";
+            }
+
             tocar(0);
         }
 
         function detener(texto = "Detenido") {
             clearTimeout(temporizador);
             temporizador = null;
+
+            function detener(texto = "Detenido") {
+            clearTimeout(temporizador);
+            temporizador = null;
+            silenciar();
 
             const estabaSonando = indiceActual >= 0;
             indiceActual = -1;
