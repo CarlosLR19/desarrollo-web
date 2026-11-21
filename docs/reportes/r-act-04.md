@@ -146,8 +146,9 @@ Las capturas se guardarán en `docs/evidencias/entregable4/`:
 - **Forma en que se verificó el resultado:** en el navegador, `Tone.context.state` quedó en `running` y se registraron las notas tocadas por cada instrumento (por ejemplo, F7 = `F4 A4 C5 D#5` durante 2.28 s), sin errores en la consola.
 
 **Carlos Vicente López Rosales**
-- `<Completar: herramienta, actividad, contenido generado y verificación de la integración del frontend con el backend.>`
-
+Integrar el frontend con el backend: subir las pantallas restantes (editor de progresiones, reproductor, guitarra, perfil, compartir y compartido.html) y los endpoints para compartir proyectos.
+Reorganizar sus registros de IA en carpetas por reporte (reporte1/ y reporte2/).
+Agregar sus registros de IA de los entregables anteriores: el esquema SQL con Gemini, la configuración de MySQL en WSL y las pruebas CURL.
 Las sesiones se documentan en `docs/IAG/`:
 - César: `Integrante1-César/reporte3/`.
 - Nino: `Integrante2-Nino/reporte3/` (`r-ia-dev-03.md` y `r-ia-doc-03.md`).

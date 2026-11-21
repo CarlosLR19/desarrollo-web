@@ -113,7 +113,7 @@ Se corrigen en el commit siguiente.
 
 ## Reflexión del estudiante
 
-`<Escribe aquí tu reflexión sobre lo que aprendiste al implementar Tone.js.>`
+La IA Generativa en esta ocacion fue de completa ayuda ya que no tenia idea de como funciona el tone.js, y de como impplementarlo completamente asi que tuve que seguir a claude paso a paso.
 
 ---
 
