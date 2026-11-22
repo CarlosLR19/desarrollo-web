@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de acordes – ChordLab</title>
+</head>
+<body>
+    <h1>Tipos de acorde sobre C</h1>
+    <table>
+        <tr><th>Símbolo</th><th>Notas</th></tr>
+        <tr th:each="a : ${acordes}">
+            <td th:text="${a.simbolo()}">C</td>
+            <td th:text="${#strings.listJoin(a.notas(), ' – ')}">C – E – G</td>
+        </tr>
+    </table>
+</body>
+</html>
