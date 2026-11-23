@@ -5,7 +5,7 @@
 #  Requiere: curl. Opcional: jq para ver el JSON formateado.
 # ============================================================
 
-API="${API:-http://localhost:8080/api}"
+API="${API:-http://localhost:8090/api}"
 CORREO="prueba$(date +%s)@chordlab.com"   # correo distinto en cada ejecución
 
 if command -v jq >/dev/null 2>&1; then FORMATO="jq ."; else FORMATO="cat"; fi

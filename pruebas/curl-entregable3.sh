@@ -6,7 +6,7 @@
 #  Requiere: curl. Opcional: jq para ver el JSON formateado.
 # ============================================================
 
-API="${API:-http://localhost:8080/api}"
+API="${API:-http://localhost:8090/api}"
 SUFIJO="$(date +%s)"
 JSON="Content-Type: application/json"
 

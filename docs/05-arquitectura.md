@@ -193,7 +193,7 @@ Los proyectos compartidos contarán con enlaces y permisos de acceso que determi
 
 El desarrollo y las pruebas de ChordLab se realizarán utilizando WSL con Ubuntu, Visual Studio Code y Git.
 
-El backend se ejecutará mediante Spring Boot, utilizando el puerto 8080 durante el desarrollo. La base de datos MySQL estará configurada para recibir las conexiones del servidor.
+El backend se ejecutará mediante Spring Boot, utilizando el puerto 8090 (configurado en `application.properties`). La base de datos MySQL estará configurada para recibir las conexiones del servidor.
 
 El frontend realizará las solicitudes hacia la API REST mediante Fetch API. Durante la etapa de integración se configurará la comunicación entre ambos módulos y los permisos necesarios para las solicitudes entre diferentes orígenes, cuando corresponda.
 
