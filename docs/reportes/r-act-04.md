@@ -80,16 +80,17 @@ Las contribuciones individuales se respaldan mediante el historial de commits de
 | Sonido del reproductor con Tone.js | Nino Alessandro Navarro Lam | [`20182e6`](https://github.com/CarlosLR19/desarrollo-web/commit/20182e6) |
 
 ## 2.2. Evidencias visuales
-Las capturas se guardarán en `docs/evidencias/entregable4/`:
+Las pantallas integradas en este entregable se capturaron durante las pruebas del Entregable 5. Cada captura muestra también la petición Fetch a la API en la pestaña Network:
 
 | Archivo | Descripción |
 |---|---|
-| `E4_Proyectos.png` | Tabla de proyectos con búsqueda, filtro y botones de acción. |
-| `E4_Editor.png` | Editor de progresiones con acordes, reproductor, teclado y diagrama de guitarra. |
-| `E4_Generador.png` | Generador de acordes y progresiones, con la opción de guardar en un proyecto. |
-| `E4_Compartir.png` | Generación de enlaces y tabla con su estado. |
-| `E4_Compartido.png` | Proyecto abierto desde un enlace compartido. |
-| `E4_Perfil.png` | Pantalla de perfil de usuario. |
+| [E5-10.png](../evidencias/pruebas/E5-10.png) | Tabla de proyectos con búsqueda y botones de acción (Editar, Eliminar, Secciones y Compartir). |
+| [E5-18.png](../evidencias/pruebas/E5-18.png) | Secciones de un proyecto con el botón Progresiones, que abre el editor. |
+| [E5-15.png](../evidencias/pruebas/E5-15.png) | Generador de acordes con el reproductor. |
+| [E5_WSL_08_reproductor_piano_guitarra.png](../evidencias/entregable5/E5_WSL_08_reproductor_piano_guitarra.png) | Progresión generada con su reproductor, teclado de piano y diagrama de guitarra. |
+| [E5-19.png](../evidencias/pruebas/E5-19.png) | Guardar la progresión generada en un proyecto: se crean la progresión y sus acordes (201). |
+| [E5-20.png](../evidencias/pruebas/E5-20.png) | Generación de un enlace para compartir y tabla de enlaces con su estado. |
+| [E5-21.png](../evidencias/pruebas/E5-21.png) | Proyecto abierto desde un enlace compartido, con permiso de solo lectura. |
 
 # 3. Problemas encontrados
 - **Scripts cargados dos veces.** `proyectos.html` repetía los `<script>` después de `</html>`. El navegador ejecutaba cada archivo dos veces y aparecían errores como `Identifier 'API_URL' has already been declared`. Se eliminó el bloque duplicado.

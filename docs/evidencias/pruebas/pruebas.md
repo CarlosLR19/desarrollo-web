@@ -48,7 +48,21 @@ El código HTTP corresponde a la respuesta obtenida en la pestaña **Network** d
 | P-21 | Compartir | Abrir un enlace válido | Éxito | Enlace generado previamente | Mostrar el proyecto compartido | 200 | OK | [E5-21](E5-21.png) |
 | P-22 | Compartir | Abrir un enlace inválido | Error | Código inexistente "123456789" | Recurso no encontrado | 404 | OK | [E5-22](E5-22.png) |
 
-## 5. Observaciones
+## 5. Persistencia en MySQL
+
+Consultas a la base de datos después de las operaciones hechas desde el frontend:
+
+| Prueba | Operación | Evidencia |
+|---|---|---|
+| P-01 | Usuario registrado en la tabla `usuario` | [creacionUsuarioDB](creacionUsuarioDB.png) |
+| P-08 | Proyecto creado en la tabla `proyecto` | [creacionProyectoDB](creacionProyectoDB.png) |
+| P-12 | Proyecto modificado (PRUEBA4-CAMBIOS, C#, 200 BPM) | [modificacionProyectoDB](modificacionProyectoDB.png) |
+| P-13 | Proyecto eliminado de la tabla `proyecto` | [eliminacionProyectoDB](eliminacionProyectoDB.png) |
+| P-18 | Sección creada en la tabla `seccion` | [creacionSeccionDB](creacionSeccionDB.png) |
+| P-19 | Progresión guardada en la tabla `progresion` | [creacionProgresionDB](creacionProgresionDB.png) |
+| P-20 | Enlace guardado en la tabla `compartir_proyecto` | [compartirProyectoDB](compartirProyectoDB.png) |
+
+## 6. Observaciones
 
 - **Validación en dos niveles:** En P-03, P-06 y P-09, el navegador bloquea el envío del formulario mediante atributos como `required`, `minlength`, `min` y `max`. Por este motivo, la petición no llega a la API. El backend también realiza validaciones mediante Bean Validation y responde con código 400 cuando recibe datos inválidos. Esto se comprueba en el script `pruebas/curl-entregable3.sh`, en los pasos 15 (tempo inválido), 16 (JSON mal formado) y 28 (perfil con nombre vacío).
 
