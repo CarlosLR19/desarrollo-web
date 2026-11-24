@@ -1,6 +1,8 @@
 # ChordLab
 Proyecto final de Desarrollo Web (LISTI, agosto 2026 – enero 2027).
 
+[Link Video Explicativo Funcionamiento](https://youtu.be/Szb5U1Cr5Ro)
+
 ## Descripción
 ChordLab es una plataforma web para crear acordes y progresiones armónicas, verlos en un teclado de piano y en un diagrama de guitarra, y reproducirlos con instrumentos virtuales. Las composiciones se guardan en proyectos organizados por secciones. Cada usuario tiene su cuenta y puede compartir sus proyectos mediante enlaces.
 
